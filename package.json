@@ -1,0 +1,14 @@
+{
+  "name": "guitrainer",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Guitrainer — guitar training app for iOS Safari",
+  "main": "start.js",
+  "scripts": {
+    "start": "node start.js",
+    "dev":   "node start.js",
+    "build": "node build.js",
+    "migrate": "node migrate.js"
+  },
+  "engines": { "node": ">=16" }
+}

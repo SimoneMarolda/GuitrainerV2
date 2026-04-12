@@ -1,0 +1,733 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   GUITRAINER — Global Stylesheet
+   File: src/style.css
+   Codice radice: GT-GLB-STY
+
+   INDICE SEZIONI:
+   GT-GLB-STY-VAR-001  → Variabili CSS (colori, spaziature, tipografia)
+   GT-GLB-STY-BKG-001  → Sistema Background (solid / gradient)
+   GT-GLB-STY-ANI-001  → Animazioni globali
+   GT-GLB-STY-RST-001  → Reset base
+   GT-GLB-STY-LAY-001  → Layout principale (screen, scroll-center)
+   GT-GLB-STY-TOP-001  → Top Bar
+   GT-GLB-STY-BOT-001  → Bottom Bar
+   GT-GLB-STY-BAR-001  → Bar items (icone + label)
+   GT-GLB-STY-PNL-001  → Pannelli (top-panel, bot-panel, overlay)
+   GT-GLB-STY-CIR-001  → Cerchio delle Quinte (legend, ring)
+   GT-GLB-STY-FRB-001  → Fretboard (wrap, chord-section, nomi)
+   GT-GLB-STY-HIS-001  → Cronologia Accordi
+   GT-GLB-STY-SEQ-001  → Unified Zone / Sequenza
+   GT-GLB-STY-ACC-001  → Pannello Accordo (card, pill, chip, queue)
+   GT-GLB-STY-GIR-001  → Pannello Giri (giro-card, deg-btn, preset)
+   GT-GLB-STY-MET-001  → Pannello Metronomo
+   GT-GLB-STY-OPZ-001  → Pannello Opzioni (dropdown, toggle, pill)
+   GT-GLB-STY-THM-001  → Temi (light, gray, gradient)
+   GT-GLB-STY-TYP-001  → Tipografia responsiva
+   ═══════════════════════════════════════════════════════════════════════ */
+
+
+/* ── GT-GLB-STY-VAR-001 — Variabili CSS globali ───────────────────── */
+:root {
+  /* Palette blu */
+  --b1: #0A22F0;
+  --b2: #1E6BFF;
+  --b3: #38B0FF;
+
+  /* Superfici */
+  --c-bg:     #000000;
+  --c-surf:   #111111;
+  --c-border: rgba(255,255,255,.10);
+  --c-lo:     rgba(255,255,255,.09);
+
+  /* Testo */
+  --c-text:   #ffffff;
+  --c-sub:    rgba(255,255,255,.35);
+
+  /* Background personalizzabile → vedi GT-GLB-STY-BKG-001 */
+  --gt-bg-type:         solid;          /* solid | gradient */
+  --gt-bg-color:        #000000;        /* usato se type=solid */
+  --gt-bg-grad-start:   #000000;        /* colore inizio gradient */
+  --gt-bg-grad-end:     #050518;        /* colore fine gradient */
+  --gt-bg-grad-angle:   135deg;         /* angolo gradient */
+
+  /* Spaziature */
+  --topbar-h:  48px;
+  --botbar-h:  56px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  /* Hairline border */
+  --hairline: .5px;
+}
+
+
+/* ── GT-GLB-STY-BKG-001 — Sistema Background personalizzabile ─────── */
+/*
+   Il background è controllato da due variabili CSS:
+     --gt-bg-type  : "solid" usa --gt-bg-color
+                     "gradient" usa --gt-bg-grad-start / end / angle
+   Cambiato runtime da JS in: src/top/opzioni/display.js → setBackground()
+*/
+html, body {
+  background-color: var(--gt-bg-color);
+  background-image: none;
+}
+html.gt-bg-gradient,
+html.gt-bg-gradient body {
+  background-color: transparent;
+  background-image: linear-gradient(
+    var(--gt-bg-grad-angle),
+    var(--gt-bg-grad-start),
+    var(--gt-bg-grad-end)
+  );
+  background-attachment: fixed;
+}
+/* Pannello picker background — GT-GLB-STY-BKG-002 */
+#gtBgPanel {
+  position: fixed;
+  bottom: calc(var(--botbar-h) + 8px);
+  left: 12px; right: 12px;
+  background: #111;
+  border: var(--hairline) solid rgba(255,255,255,.15);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px 18px;
+  z-index: 200;
+  display: none;
+}
+#gtBgPanel.on { display: block; }
+.gt-bg-swatch {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: var(--hairline) solid rgba(255,255,255,.2);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform .15s;
+}
+.gt-bg-swatch:hover { transform: scale(1.12); }
+.gt-bg-swatch.sel   { outline: 2px solid var(--b3); outline-offset: 2px; }
+
+
+/* ── GT-GLB-STY-ANI-001 — Animazioni globali ─────────────────────── */
+@keyframes bgl {
+  0%,100% { opacity: .3 }
+  50%      { opacity: .88 }
+}
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to   { opacity: 1 }
+}
+@keyframes barFlash {
+  0%   { background: var(--bc); opacity: .65 }
+  40%  { background: #fff; opacity: 1 }
+  60%  { background: #fff; opacity: 1 }
+  100% { background: var(--bc); opacity: .65 }
+}
+@keyframes panelDown {
+  from { opacity: 0; transform: translateY(-10px) }
+  to   { opacity: 1; transform: none }
+}
+@keyframes panelUp {
+  from { opacity: 0; transform: translateY(10px) }
+  to   { opacity: 1; transform: none }
+}
+@keyframes borderGlow {
+  0%,100% { border-color: var(--b2); box-shadow: 0 0 6px rgba(30,107,255,.3) }
+  50%      { border-color: var(--b3); box-shadow: 0 0 14px rgba(56,176,255,.6) }
+}
+
+
+/* ── GT-GLB-STY-RST-001 — Reset base ────────────────────────────────*/
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+  font-family: -apple-system, "SF Pro Display", sans-serif;
+  color: var(--c-text);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+
+/* ── GT-GLB-STY-LAY-001 — Layout principale ─────────────────────── */
+.screen {
+  height: 100vh;
+  height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+.scroll-center {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 12px 8px;
+  gap: 6px;
+  scrollbar-width: none;
+}
+.scroll-center::-webkit-scrollbar { display: none }
+
+
+/* ── GT-GLB-STY-TOP-001 — Top Bar ───────────────────────────────── */
+.topbar {
+  height: var(--topbar-h);
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  flex-shrink: 0;
+  border-bottom: var(--hairline) solid rgba(30,107,255,.35);
+  background: transparent;   /* lascia trasparire il bg personalizzato */
+  position: relative;
+  z-index: 100;
+}
+
+
+/* ── GT-GLB-STY-BOT-001 — Bottom Bar ────────────────────────────── */
+.botbar {
+  height: var(--botbar-h);
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  flex-shrink: 0;
+  background: transparent;
+  position: relative;
+  z-index: 100;
+  border-top: var(--hairline) solid rgba(30,107,255,.25);
+}
+
+
+/* ── GT-GLB-STY-BAR-001 — Bar items ─────────────────────────────── */
+/* GT-GLB-STY-BAR-001a — item container */
+.bar-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 5px 3px;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all .2s;
+  user-select: none;
+}
+.bar-item:hover { background: rgba(255,255,255,.06) }
+
+/* GT-GLB-STY-BAR-001b — icona */
+.bi-icon {
+  font-size: 18px;
+  color: rgba(255,255,255,.32);
+  transition: color .2s;
+  line-height: 1;
+}
+
+/* GT-GLB-STY-BAR-001c — label */
+.bi-label {
+  font-size: 7px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.22);
+  transition: color .2s;
+}
+
+/* GT-GLB-STY-BAR-001d — stato attivo */
+.bar-item.sel .bi-icon {
+  color: var(--b3);
+  filter: drop-shadow(0 0 5px rgba(56,176,255,.4));
+}
+.bar-item.sel .bi-label { color: rgba(255,255,255,.7) }
+
+/* GT-GLB-STY-BAR-001e — play button centrale */
+.play-slot {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pBtn {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(30,107,255,.18);
+  border: 1px solid rgba(30,107,255,.7);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; color: #fff;
+  cursor: pointer;
+  animation: bgl 3s ease infinite;
+  user-select: none;
+  box-shadow: 0 0 14px rgba(30,107,255,.2);
+  transition: all .2s;
+}
+.pBtn:hover { background: rgba(30,107,255,.3) }
+.pBtn.active { animation: none; background: rgba(30,107,255,.35) }
+
+
+/* ── GT-GLB-STY-PNL-001 — Pannelli ──────────────────────────────── */
+/* GT-GLB-STY-PNL-001a — base pannello */
+.panel {
+  position: absolute;
+  left: 0; right: 0;
+  z-index: 40;
+  background: rgba(0,0,0,.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: var(--hairline) solid rgba(255,255,255,.12);
+  padding: 12px 14px 16px;
+  display: none;
+  max-height: 66vh;
+  overflow-y: auto;
+}
+/* GT-GLB-STY-PNL-001b — pannello top */
+.panel.top-panel {
+  top: var(--topbar-h);
+  border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+/* GT-GLB-STY-PNL-001c — pannello bottom */
+.panel.bot-panel {
+  bottom: var(--botbar-h);
+  border-bottom: none;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+/* GT-GLB-STY-PNL-001d — animazioni apertura */
+.panel.top-panel.on { display: block; animation: panelDown .2s cubic-bezier(.4,0,.2,1) }
+.panel.bot-panel.on { display: block; animation: panelUp   .2s cubic-bezier(.4,0,.2,1) }
+
+/* GT-GLB-STY-PNL-001e — overlay di chiusura */
+.panel-overlay {
+  position: absolute; inset: 0;
+  z-index: 39; display: none;
+}
+.panel-overlay.on { display: block }
+
+/* GT-GLB-STY-PNL-001f — titolo pannello */
+.p-title {
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  margin-bottom: 10px;
+}
+
+/* GT-GLB-STY-PNL-001g — segmento gruppo (sgi) */
+.sg   { display: flex; flex-direction: column; gap: 4px }
+.sgi  {
+  padding: 8px 10px;
+  border: var(--hairline) solid var(--c-border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  cursor: pointer;
+  transition: all .2s;
+}
+.sgi.on  { border-color: var(--b2); background: rgba(30,107,255,.08) }
+.sgi-n   { font-size: 12px; font-weight: 300; color: var(--c-text) }
+.sgi-s   { font-size: 8px; color: var(--c-sub); margin-top: 1px }
+
+/* GT-GLB-STY-PNL-001h — pill generico */
+.fpill {
+  flex-shrink: 0;
+  font-size: 9px; font-weight: 500; letter-spacing: .5px;
+  padding: 4px 10px;
+  border-radius: 14px;
+  border: var(--hairline) solid rgba(255,255,255,.1);
+  color: rgba(255,255,255,.35);
+  cursor: pointer;
+  user-select: none;
+  transition: all .2s;
+  white-space: nowrap;
+}
+.fpill.on {
+  color: #fff;
+  border-color: var(--b2);
+  background: rgba(30,107,255,.09);
+}
+
+/* GT-GLB-STY-PNL-001i — separatore */
+.hr {
+  width: 100%; max-width: 360px;
+  height: var(--hairline);
+  background: rgba(255,255,255,.08);
+  flex-shrink: 0;
+}
+
+
+/* ── GT-GLB-STY-CIR-001 — Cerchio delle Quinte ──────────────────── */
+/* GT-GLB-STY-CIR-001a — wrapper SVG */
+#svgWrap {
+  transition: width .4s ease, height .4s ease;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+#svgWrap svg { width: 100%; height: auto; display: block }
+
+/* GT-GLB-STY-CIR-001b — label tonalità */
+#keyDisp {
+  font-size: 22px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  text-align: center;
+  color: var(--b3);
+  width: 100%; max-width: 360px;
+  flex-shrink: 0;
+  margin: 4px 0 2px;
+}
+
+/* GT-GLB-STY-CIR-001c — label modo (Semplice, Normale…) */
+.key-row  { display: flex; align-items: center; gap: 7px; width: 100%; max-width: 360px; justify-content: center }
+.modeLbl  {
+  font-size: 7px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--c-sub);
+  border: var(--hairline) solid var(--c-border);
+  border-radius: 10px; padding: 2px 8px;
+}
+
+/* GT-GLB-STY-CIR-001d — ring legend */
+.ring-legend {
+  display: flex; gap: 5px; flex-wrap: wrap;
+  justify-content: center;
+  width: 100%; max-width: 360px;
+}
+.rl {
+  display: flex; align-items: center; gap: 4px;
+  padding: 2px 7px;
+  border: var(--hairline) solid rgba(255,255,255,.09);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all .2s; user-select: none;
+}
+.rl:hover { border-color: rgba(255,255,255,.22) }
+.rl.off   { opacity: .3 }
+.rl-dot   { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0 }
+.rl-txt   { font-size: 7.5px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.5) }
+
+
+/* ── GT-GLB-STY-FRB-001 — Fretboard ─────────────────────────────── */
+/* GT-GLB-STY-FRB-001a — sezione chord */
+.chord-section {
+  width: 100%; max-width: 360px;
+  margin: 0 auto;
+}
+/* GT-GLB-STY-FRB-001b — nome accordo */
+.chord-name {
+  font-size: 20px; font-weight: 500;
+  color: var(--c-text);
+  text-align: center;
+}
+/* GT-GLB-STY-FRB-001c — note accordo */
+.chord-notes-txt {
+  font-size: 11px;
+  color: var(--c-sub);
+  text-align: center;
+  margin-top: 2px;
+}
+/* GT-GLB-STY-FRB-001d — wrap SVG fretboard */
+#fretboardWrap { width: 100% }
+#fretboardWrap svg { width: 100%; height: auto; display: block }
+
+/* GT-GLB-STY-FRB-001e — label tasto iniziale */
+#fretStartLbl {
+  font-size: 22px; font-weight: 700;
+  color: rgba(255,255,255,.55);
+  letter-spacing: -.5px;
+  min-width: 32px; line-height: 1;
+}
+
+
+/* ── GT-GLB-STY-HIS-001 — Cronologia Accordi ────────────────────── */
+/* GT-GLB-STY-HIS-001a — wrapper */
+.hist-wrap {
+  width: 100%; max-width: 360px;
+  flex-shrink: 0;
+}
+/* GT-GLB-STY-HIS-001b — intestazione */
+.hist-head {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.hist-lbl {
+  font-size: 8px; letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+}
+/* GT-GLB-STY-HIS-001c — bottone azzera */
+.hist-reset {
+  font-size: 8px; color: rgba(255,255,255,.2);
+  cursor: pointer;
+  border: var(--hairline) solid rgba(255,255,255,.09);
+  border-radius: 7px; padding: 1px 7px;
+  transition: all .2s;
+}
+.hist-reset:hover { color: #fff; border-color: rgba(255,255,255,.35) }
+
+/* GT-GLB-STY-HIS-001d — scroll orizzontale chip */
+.histScroll {
+  display: flex; gap: 6px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  align-items: flex-start;
+  height: 62px;
+  transition: height .3s ease;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.12) transparent;
+  padding: 2px 0 4px;
+}
+.histScroll::-webkit-scrollbar { height: 2px }
+.histScroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 2px }
+
+
+/* ── GT-GLB-STY-SEQ-001 — Unified Zone / Sequenza ───────────────── */
+/* GT-GLB-STY-SEQ-001a — wrapper */
+#unifiedZone {
+  width: 100%; max-width: 360px;
+  flex-shrink: 0;
+}
+/* GT-GLB-STY-SEQ-001b — slot progressione */
+.prog-slot {
+  flex-shrink: 0; width: 50px; height: 50px;
+  border: var(--hairline) solid rgba(255,255,255,.1);
+  border-radius: 9px;
+  background: transparent;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all .18s;
+  position: relative; padding: 3px 6px;
+}
+.prog-slot.active-beat {
+  transform: scale(1.06);
+  box-shadow: 0 0 14px rgba(30,107,255,.5);
+  z-index: 2;
+}
+.prog-slot.drag-over-slot { border-color: #18CC66; background: rgba(24,204,102,.08) }
+.prog-slot-name  { font-size: 11px; font-weight: 400; color: var(--c-text); text-align: center; line-height: 1.1 }
+.prog-slot-sub   { font-size: 7px; color: var(--c-sub); text-align: center }
+.prog-slot-rm {
+  position: absolute; top: -5px; right: -5px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: #FF2255; border: none;
+  color: #fff; font-size: 9px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .15s;
+}
+.prog-slot:hover .prog-slot-rm { opacity: 1 }
+.prog-add-slot { border-style: dashed; color: rgba(255,255,255,.2); font-size: 18px }
+
+
+/* ── GT-GLB-STY-ACC-001 — Pannello Accordo ──────────────────────── */
+/* GT-GLB-STY-ACC-001a — note pill */
+.acnpill {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 32px;
+  border-radius: var(--radius-md);
+  border: var(--hairline) solid rgba(255,255,255,.12);
+  font-size: 13px; font-weight: 300;
+  cursor: pointer;
+  transition: all .18s;
+  user-select: none;
+}
+.acnpill.on { color: #fff }
+
+/* GT-GLB-STY-ACC-001b — chord card */
+.accard {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 3px;
+  border-radius: var(--radius-md);
+  border: var(--hairline) solid transparent;
+  background: transparent;
+  padding: 8px 6px 7px;
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+}
+.accard.fc  { border-color: #18CC66 }
+.accard.pc  { border-color: rgba(255,153,0,.5) }
+.accard.onq { background: rgba(24,204,102,.06) }
+.accard-n   { font-size: 11px; font-weight: 500; color: var(--c-text); text-align: center }
+.accard-q   { font-size: 7px; letter-spacing: .8px; color: var(--c-sub); text-align: center }
+
+/* GT-GLB-STY-ACC-001c — queue chip */
+.acqchip {
+  flex-shrink: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 8px 10px;
+  border-radius: var(--radius-md);
+  font-size: 13px; font-weight: 300; color: var(--c-text);
+  border: var(--hairline) solid rgba(255,255,255,.15);
+  background: transparent;
+  white-space: nowrap; cursor: grab;
+  min-width: 64px; text-align: center;
+  transition: opacity .2s, transform .15s, border-color .2s;
+  user-select: none;
+}
+.acqchip:active  { cursor: grabbing }
+.acqchip.dragging{ opacity: .4; transform: scale(.95) }
+.acqchip.drag-over { border-color: var(--b3); background: rgba(30,107,255,.12) }
+.acqchip.fc      { border-color: rgba(24,204,102,.5) }
+.acqchip.pc      { border-color: rgba(255,153,0,.4) }
+.acqchip-qual    { font-size: 7.5px; letter-spacing: .5px; color: var(--c-sub) }
+.acqchip-idx     { font-size: 6.5px; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.22) }
+.acqrm           { font-size: 14px; color: rgba(255,255,255,.28); cursor: pointer; line-height: 1 }
+.acqrm:hover     { color: #FF2255 }
+
+
+/* ── GT-GLB-STY-GIR-001 — Pannello Giri ─────────────────────────── */
+/* GT-GLB-STY-GIR-001a — giro card */
+.giro-card {
+  border: var(--hairline) solid rgba(255,255,255,.1);
+  border-radius: var(--radius-md);
+  padding: 9px 10px; cursor: pointer;
+  background: transparent;
+  transition: all .2s; flex-shrink: 0; width: 116px;
+  scroll-snap-align: start;
+}
+.giro-card:hover { border-color: rgba(255,255,255,.25) }
+.giro-card.sel   { border-color: var(--b2); background: rgba(30,107,255,.08) }
+.giro-icon       { font-size: 16px; margin-bottom: 3px }
+.giro-name       { font-size: 11px; font-weight: 500; color: var(--c-text); margin-bottom: 1px }
+.giro-genre      { font-size: 7px; letter-spacing: .8px; text-transform: uppercase; color: var(--c-sub) }
+.giro-degs       { display: flex; gap: 3px; flex-wrap: wrap; margin-top: 5px }
+.giro-deg        { font-size: 8px; padding: 1px 5px; border-radius: 5px; border: var(--hairline) solid rgba(255,255,255,.12); color: rgba(255,255,255,.45) }
+.giro-deg.root   { border-color: var(--b2); color: var(--b3) }
+
+/* GT-GLB-STY-GIR-001b — degree button (costruttore) */
+.deg-btn {
+  height: 38px;
+  border: var(--hairline) solid rgba(255,255,255,.1);
+  border-radius: var(--radius-sm);
+  font-size: 10px; font-weight: 600;
+  color: rgba(255,255,255,.45);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s; background: transparent;
+}
+.deg-btn.sel { border-color: var(--b2); color: var(--b3); background: rgba(30,107,255,.09) }
+
+/* GT-GLB-STY-GIR-001c — preset row */
+.preset-row-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 9px;
+  border: var(--hairline) solid rgba(255,255,255,.08);
+  border-radius: 9px; cursor: pointer;
+  background: transparent; transition: all .18s;
+}
+.preset-row-item:hover  { border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.03) }
+.preset-row-item.active { border-color: var(--b2); background: rgba(30,107,255,.07) }
+.preset-name  { font-size: 12px; font-weight: 400; color: var(--c-text); flex: 1 }
+.preset-genre { font-size: 8px; color: var(--c-sub); letter-spacing: .5px }
+.preset-degs  { display: flex; gap: 3px; flex-wrap: wrap }
+
+
+/* ── GT-GLB-STY-MET-001 — Pannello Metronomo ────────────────────── */
+/* GT-GLB-STY-MET-001a — display BPM grande */
+#bigBpmDisp {
+  font-size: 52px; font-weight: 100;
+  letter-spacing: -4px; color: var(--c-text); line-height: 1;
+}
+/* GT-GLB-STY-MET-001b — bottoni ±BPM */
+.mb {
+  padding: 6px 10px;
+  border: var(--hairline) solid var(--c-border);
+  border-radius: var(--radius-sm);
+  font-size: 11px; font-weight: 500; color: var(--c-text);
+  cursor: pointer; transition: all .15s; user-select: none;
+}
+.mb:hover { background: rgba(255,255,255,.06) }
+/* GT-GLB-STY-MET-001c — tap tempo */
+.tapBtn {
+  padding: 7px 22px;
+  border: var(--hairline) solid var(--b2);
+  border-radius: var(--radius-md);
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--c-text); cursor: pointer;
+  transition: all .15s; user-select: none;
+}
+.tapBtn:active { background: rgba(30,107,255,.2) }
+/* GT-GLB-STY-MET-001d — pill beat per accordo e progressione BPM */
+.pp {
+  flex: 1; text-align: center;
+  padding: 6px 4px;
+  border: var(--hairline) solid var(--c-border);
+  border-radius: var(--radius-sm);
+  font-size: 9px; color: rgba(255,255,255,.4);
+  cursor: pointer; transition: all .18s;
+}
+.pp.sel { border-color: var(--b2); color: var(--b3); background: rgba(30,107,255,.09) }
+/* GT-GLB-STY-MET-001e — slider globale */
+input[type=range] {
+  width: 100%; accent-color: var(--b2);
+  margin-bottom: 8px;
+}
+/* GT-GLB-STY-MET-001f — row label/valore */
+.srow   { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px }
+.srow-l { font-size: 9px; color: var(--c-sub) }
+.srow-v { font-size: 9px; color: var(--c-text) }
+
+
+/* ── GT-GLB-STY-OPZ-001 — Pannello Opzioni ──────────────────────── */
+/* GT-GLB-STY-OPZ-001a — toggle switch */
+.gt-toggle {
+  width: 36px; height: 20px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.1);
+  border: var(--hairline) solid rgba(255,255,255,.2);
+  cursor: pointer; position: relative;
+  transition: all .2s; flex-shrink: 0;
+}
+.gt-toggle.on {
+  background: rgba(30,107,255,.25);
+  border-color: var(--b2);
+}
+.gt-thumb {
+  position: absolute; top: 2px; left: 2px;
+  width: 15px; height: 15px; border-radius: 50%;
+  background: rgba(255,255,255,.4);
+  transition: all .2s;
+}
+.gt-toggle.on .gt-thumb {
+  left: 19px;
+  background: var(--b3);
+}
+
+/* GT-GLB-STY-OPZ-001b — dropdown */
+.ddopt {
+  padding: 8px 12px;
+  font-size: 11px; font-weight: 300;
+  color: rgba(255,255,255,.7);
+  cursor: pointer;
+  transition: background .12s;
+}
+.ddopt:hover { background: rgba(255,255,255,.06) }
+.ddopt.on    { color: var(--c-text); font-weight: 500 }
+
+
+/* ── GT-GLB-STY-THM-001 — Temi ──────────────────────────────────── */
+/* GT-GLB-STY-THM-001a — tema chiaro */
+.theme-light {
+  --c-text:   #111111;
+  --c-sub:    rgba(0,0,0,.45);
+  --c-border: rgba(0,0,0,.12);
+  --c-surf:   #e8e8e8;
+}
+/* GT-GLB-STY-THM-001b — tema grigio */
+.theme-gray {
+  --c-bg:     #1a1a1a;
+  --c-surf:   #2a2a2a;
+  --c-border: rgba(255,255,255,.12);
+}
+/* GT-GLB-STY-THM-001c — continuità visiva: elementi specchio tra topbar e botbar */
+/* Entrambe usano transparent background e stessa altezza delle icone  */
+/* Entrambe usano lo stesso border color (rgba 30,107,255) ma top .35 / bot .25  */
+/* Continuità colori: .bar-item.sel usa sempre --b3 sia in top che in bot        */
+
+
+/* ── GT-GLB-STY-TYP-001 — Tipografia responsiva ─────────────────── */
+/* GT-GLB-STY-TYP-001a — font size globale (scalato da setFontSize) */
+html { font-size: 100% }
+html.gt-font-large  { font-size: 110% }
+html.gt-font-xlarge { font-size: 125% }

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+<title>Guitrainer</title>
+<!-- CSS_PLACEHOLDER -->
+</head>
+<body>
+<div class="screen">
+
+  <!-- TOP BAR -->
+
+  <div class="topbar" id="topBar">
+    <div class="bar-item" onclick="togglePanel('p-tonalita','top',this)">
+      <div class="bi-icon">⬡</div><div class="bi-label">Tonalità</div>
+    </div>
+    <div class="bar-item" onclick="togglePanel('p-modalita','top',this)">
+      <div class="bi-icon">≋</div><div class="bi-label">Modalità</div>
+    </div>
+    <div class="bar-item" onclick="togglePanel('p-genera','top',this)">
+      <div class="bi-icon">∿</div><div class="bi-label">Genera</div>
+    </div>
+    <div class="bar-item" onclick="togglePanel('p-cerchio','top',this)">
+      <div class="bi-icon">◎</div><div class="bi-label">Cerchio</div>
+    </div>
+    <div class="bar-item" onclick="togglePanel('p-opzioni','top',this)">
+      <div class="bi-icon">☰</div><div class="bi-label">Opzioni</div>
+    </div>
+  </div>
+
+  <!-- TOP PANELS -->
+
+  <div class="panel top-panel" id="p-tonalita">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><div class="p-title" style="margin:0">Tonalità</div><div style="display:flex;border:.5px solid rgba(255,255,255,.14);border-radius:10px;overflow:hidden"><div id="tonMinBtn" onclick="setTonMode('min')" style="padding:4px 13px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;background:rgba(30,107,255,.18);color:#38B0FF">MIN</div><div id="tonMajBtn" onclick="setTonMode('maj')" style="padding:4px 13px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;background:transparent;color:rgba(255,255,255,.3)">MAJ</div></div></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <div style="padding:6px 13px;border:.5px solid #0A22F066;border-radius:9px;font-size:14px;font-weight:300;color:#fff;cursor:pointer;background:#0A22F018" onclick="setKey(0)">Do</div> <div style="padding:6px 13px;border:.5px solid #1430FF66;border-radius:9px;font-size:14px;font-weight:300;color:#fff;cursor:pointer;background:#1430FF18" onclick="setKey(1)">Sol</div> <div style="padding:6px 13px;border:.5px solid #1E6BFF66;border-radius:9px;font-size:14px;font-weight:300;color:#fff;cursor:pointer;background:#1E6BFF18" onclick="setKey(2)">Re</div> <div style="padding:6px 13px;border:.5px solid #38B0FF66;border-radius:9px;font-size:14px;font-weight:300;color:#fff;cursor:pointer;background:#38B0FF18" onclick="setKey(3)">La</div> <div style="padding:6px 13px;border:.5px solid #22DDCC66;border-radius:9px;font-size:14px;font-weight:300;color:#fff;cursor:pointer;background:#22DDCC18" onclick="setKey(4)">Mi</div> <div style="padding:6px 13px;border:.5px solid #18CC6666;border-radius:9px;font-size:14px;font-weight:300;color:#fff;cursor:pointer;background:#18CC6618" onclick="setKey(5)">Si</div> <div style="padding:6px 13px;border:.5px solid #CCCC0066;border-radius:9px;font-size:14px;font-weight:300;color:#fff;cursor:pointer;background:#CCCC0018" onclick="setKey(6)">Fa#</div> <div style="padding:6px 13px;border:.5px solid #FF990066;border-radius:9px;font-size:14px;font-weight:300;color:#fff;cursor:pointer;background:#FF990018" onclick="setKey(7)">Re♭</div> <div style="padding:6px 13px;border:.5px solid #FF550066;border-radius:9px;font-size:14px;font-weight:300;color:#fff;cursor:pointer;background:#FF550018" onclick="setKey(8)">La♭</div> <div style="padding:6px 13px;border:.5px solid #FF225566;border-radius:9px;font-size:14px;font-weight:300;color:#fff;cursor:pointer;background:#FF225518" onclick="setKey(9)">Mi♭</div> <div style="padding:6px 13px;border:.5px solid #CC11AA66;border-radius:9px;font-size:14px;font-weight:300;color:#fff;cursor:pointer;background:#CC11AA18" onclick="setKey(10)">Si♭</div> <div style="padding:6px 13px;border:.5px solid #6622FF66;border-radius:9px;font-size:14px;font-weight:300;color:#fff;cursor:pointer;background:#6622FF18" onclick="setKey(11)">Fa</div>
+    </div>
+  </div>
+
+  <div class="panel top-panel" id="p-modalita">
+    <div class="p-title">Modalità</div>
+    <!-- Studio -->
+    <div style="font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:6px">Studio</div>
+    <div class="sg" style="margin-bottom:10px">
+      <div class="sgi on"  onclick="setStudioMode('accordi',this)"><div class="sgi-n">Accordi</div><div class="sgi-s">diteggiatura · random</div></div>
+      <div class="sgi"     onclick="setStudioMode('armonia',this)"><div class="sgi-n">Armonia</div><div class="sgi-s">giri · progressioni</div></div>
+      <div class="sgi"     onclick="setStudioMode('scale',this)"><div class="sgi-n">Scale</div><div class="sgi-s">scale · modi</div></div>
+      <div class="sgi"     onclick="setStudioMode('accordi_scale',this)"><div class="sgi-n">Acc. + Scale</div><div class="sgi-s">diteggiatura + scala</div></div>
+      <div class="sgi"     onclick="setStudioMode('armonia_scale',this)"><div class="sgi-n">Arm. + Scale</div><div class="sgi-s">giri + scala modale</div></div>
+    </div>
+    <!-- Cerchio -->
+    <div style="font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:6px">Cerchio delle Quinte</div>
+    <div class="sg">
+      <div class="sgi on"  onclick="setMode('semplice',this)"><div class="sgi-n">Semplice</div><div class="sgi-s">quinte only</div></div>
+      <div class="sgi"     onclick="setMode('normale',this)"><div class="sgi-n">Normale</div><div class="sgi-s">+ diatonici</div></div>
+      <div class="sgi"     onclick="setMode('difficile',this)"><div class="sgi-n">Difficile</div><div class="sgi-s">tutti gli anelli</div></div>
+      <div class="sgi"     onclick="setMode('libero',this)"><div class="sgi-n">Libero</div><div class="sgi-s">senza tonalità</div></div>
+    </div>
+
+  </div>
+
+  <div class="panel top-panel" id="p-genera">
+    <div class="p-title">Genera Accordi</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+      <div><div style="font-size:8px;color:rgba(255,255,255,.35);margin-bottom:4px">Accordi <span id="gnChV" style="color:#fff">4</span></div>
+      <input type="range" min="2" max="12" value="4" oninput="gnNumChords=+this.value;document.getElementById('gnChV').textContent=this.value"></div>
+      <div><div style="font-size:8px;color:rgba(255,255,255,.35);margin-bottom:4px">Battute <span id="gnBpV" style="color:#fff">4</span></div>
+      <input type="range" min="1" max="8" value="4" oninput="barsPerChord=+this.value;document.getElementById('gnBpV').textContent=this.value"></div>
+    </div>
+    <div style="font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:5px">Base Armonica</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:9px">
+      <div class="fpill on" id="gnDiatBtn" onclick="gnToggle('diat',this)">Diatonico</div>
+      <div class="fpill" id="gnRandBtn" onclick="gnToggle('rand',this)">+ Random Tonale</div>
+    </div>
+    <div style="font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:5px">Regole Armoniche <span style="font-weight:300;text-transform:none;font-size:7px;color:rgba(255,255,255,.22)">aggiuntive</span></div>
+    <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:10px">
+      <div class="fpill" id="gnSecDomBtn" onclick="gnToggle('secdom',this)" style="width:100%;text-align:left;border-radius:8px;padding:7px 10px;white-space:normal"><div style="font-weight:600;font-size:10px">Dominanti Secondarie</div><div style="color:rgba(255,255,255,.32);font-size:8px;margin-top:1px">V7 di ogni grado — tensione diretta verso il grado successivo</div></div>
+      <div class="fpill" id="gnTritonBtn" onclick="gnToggle('triton',this)" style="width:100%;text-align:left;border-radius:8px;padding:7px 10px;white-space:normal"><div style="font-weight:600;font-size:10px">Sostituzione Tritono</div><div style="color:rgba(255,255,255,.32);font-size:8px;margin-top:1px">♭II7 al posto di V7 — basso cromatico discendente</div></div>
+      <div class="fpill" id="gnModalBtn" onclick="gnToggle('modal',this)" style="width:100%;text-align:left;border-radius:8px;padding:7px 10px;white-space:normal"><div style="font-weight:600;font-size:10px">Intercambio Modale</div><div style="color:rgba(255,255,255,.32);font-size:8px;margin-top:1px">Accordi dal parallelo maggiore / dorico / frigio</div></div>
+      <div class="fpill" id="gnNeapBtn" onclick="gnToggle('neap',this)" style="width:100%;text-align:left;border-radius:8px;padding:7px 10px;white-space:normal"><div style="font-weight:600;font-size:10px">Accordo Napoletano</div><div style="color:rgba(255,255,255,.32);font-size:8px;margin-top:1px">♭II Maggiore — funzione subdominante, tipico del classico</div></div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <div style="flex:1;text-align:center;padding:8px;border:.5px solid var(--b2);border-radius:9px;cursor:pointer;font-size:10px;color:#fff;letter-spacing:1.5px;text-transform:uppercase" onclick="buildGenera();closeAllPanels()">&#9654; Genera</div>
+      <div style="flex:1;text-align:center;padding:8px;border:.5px solid #18CC66;border-radius:9px;cursor:pointer;font-size:10px;color:#fff;letter-spacing:1.5px;text-transform:uppercase" id="genLoopBtn" onclick="toggleGenLoop()">&#9711; Loop</div>
+    </div>
+  </div>
+
+  <div class="panel top-panel" id="p-cerchio">
+    <div class="p-title">Anelli del Cerchio</div>
+    <div style="display:flex;flex-direction:column;gap:7px">
+      <div style="display:flex;align-items:center;gap:10px;padding:9px 11px;border:.5px solid rgba(255,255,255,.1);border-radius:9px;cursor:pointer;background:#000"
+        onclick="toggleRingLayer('r2s',this)">
+        <div style="width:9px;height:9px;border-radius:50%;background:#22DDCC;flex-shrink:0"></div>
+        <div style="flex:1;font-size:13px;font-weight:300;color:#fff">Accordi Diatonici</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.3)" id="rl2txt">ON</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:9px 11px;border:.5px solid rgba(255,255,255,.1);border-radius:9px;cursor:pointer;background:#000"
+        onclick="toggleRingLayer('r3s',this)">
+        <div style="width:9px;height:9px;border-radius:50%;background:#FF9340;flex-shrink:0"></div>
+        <div style="flex:1;font-size:13px;font-weight:300;color:#fff">Dominanti Secondarie</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.3)" id="rl3txt">OFF</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:9px 11px;border:.5px solid rgba(255,255,255,.1);border-radius:9px;cursor:pointer;background:#000"
+        onclick="toggleRingLayer('r4s',this)">
+        <div style="width:9px;height:9px;border-radius:50%;background:#9B22CC;flex-shrink:0"></div>
+        <div style="flex:1;font-size:13px;font-weight:300;color:#fff">Sostituzione Tritono</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.3)" id="rl4txt">OFF</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel top-panel" id="p-opzioni">
+    <div class="p-title">Opzioni</div>
+
+<!-- ALLENAMENTO SENZA TONALITÀ -->
+<div style="font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:6px">Modalità Allenamento</div>
+<div style="display:flex;flex-direction:column;gap:5px;margin-bottom:10px">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 11px;border:.5px solid rgba(255,255,255,.1);border-radius:9px;background:#000">
+    <div>
+      <div style="font-size:12px;font-weight:300;color:#fff">Libero — Senza Tonalità</div>
+      <div style="font-size:8px;color:rgba(255,255,255,.3);margin-top:1px">Studia accordi indipendentemente dalla scala</div>
+    </div>
+    <div id="freeToggle" onclick="toggleFree()" style="width:36px;height:20px;border-radius:10px;background:rgba(255,255,255,.1);border:.5px solid rgba(255,255,255,.2);cursor:pointer;position:relative;transition:all .2s;flex-shrink:0">
+      <div id="freeThumb" style="position:absolute;top:2px;left:2px;width:15px;height:15px;border-radius:50%;background:rgba(255,255,255,.4);transition:all .2s"></div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 11px;border:.5px solid rgba(255,255,255,.1);border-radius:9px;background:#000">
+    <div>
+      <div style="font-size:12px;font-weight:300;color:#fff">Random Accordi</div>
+      <div style="font-size:8px;color:rgba(255,255,255,.3);margin-top:1px">Accordi casuali al cambio beat, ignora progressione</div>
+    </div>
+    <div id="randToggle" onclick="toggleRandMode()" style="width:36px;height:20px;border-radius:10px;background:rgba(255,255,255,.1);border:.5px solid rgba(255,255,255,.2);cursor:pointer;position:relative;transition:all .2s;flex-shrink:0">
+      <div id="randThumb" style="position:absolute;top:2px;left:2px;width:15px;height:15px;border-radius:50%;background:rgba(255,255,255,.4);transition:all .2s"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTRI QUALITÀ ACCORDI per randMode -->
+<div style="font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:6px">Tipo Accordi · Allenamento</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:10px">
+
+  <!-- MAG -->
+  <div style="position:relative">
+    <div style="font-size:7px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px">Maj</div>
+    <div id="majTypeBtn" onclick="toggleDropdown('majDrop')"
+      style="display:flex;align-items:center;justify-content:space-between;padding:6px 9px;border:.5px solid rgba(255,255,255,.14);border-radius:8px;cursor:pointer;font-size:9px;font-weight:600;color:#fff;background:#000">
+      <span id="majTypeLbl">Magg.</span>
+      <svg width="8" height="8" viewBox="0 0 8 8"><path d="M1 2.5 L4 5.5 L7 2.5" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.2"/></svg>
+    </div>
+    <div id="majDrop" style="display:none;position:absolute;top:100%;left:0;right:0;z-index:200;background:#1a1a1a;border:.5px solid rgba(255,255,255,.18);border-radius:8px;overflow:hidden;margin-top:2px">
+      <div class="ddopt on" data-grp="maj" data-v="Maggiore"            onclick="setRandType('maj',this)">Magg.</div>
+      <div class="ddopt"    data-grp="maj" data-v="Magg. 7ª"           onclick="setRandType('maj',this)">Magg 7</div>
+      <div class="ddopt"    data-grp="maj" data-v="Dom. 7ª"            onclick="setRandType('maj',this)">Dom 7</div>
+      <div class="ddopt"    data-grp="maj" data-v="Power 5ª"           onclick="setRandType('maj',this)">Magg 5</div>
+    </div>
+  </div>
+
+  <!-- MIN -->
+  <div style="position:relative">
+    <div style="font-size:7px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px">Min</div>
+    <div id="minTypeBtn" onclick="toggleDropdown('minDrop')"
+      style="display:flex;align-items:center;justify-content:space-between;padding:6px 9px;border:.5px solid rgba(255,255,255,.14);border-radius:8px;cursor:pointer;font-size:9px;font-weight:600;color:#fff;background:#000">
+      <span id="minTypeLbl">Min.</span>
+      <svg width="8" height="8" viewBox="0 0 8 8"><path d="M1 2.5 L4 5.5 L7 2.5" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.2"/></svg>
+    </div>
+    <div id="minDrop" style="display:none;position:absolute;top:100%;left:0;right:0;z-index:200;background:#1a1a1a;border:.5px solid rgba(255,255,255,.18);border-radius:8px;overflow:hidden;margin-top:2px">
+      <div class="ddopt on" data-grp="min" data-v="Minore"             onclick="setRandType('min',this)">Min.</div>
+      <div class="ddopt"    data-grp="min" data-v="Min. 7ª"            onclick="setRandType('min',this)">Min 7</div>
+      <div class="ddopt"    data-grp="min" data-v="Power 5ª"           onclick="setRandType('min',this)">Min 5</div>
+    </div>
+  </div>
+
+  <!-- MIX -->
+  <div style="position:relative">
+    <div style="font-size:7px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px">Mix</div>
+    <div id="mixTypeBtn" onclick="toggleDropdown('mixDrop')"
+      style="display:flex;align-items:center;justify-content:space-between;padding:6px 9px;border:.5px solid var(--b2);border-radius:8px;cursor:pointer;font-size:9px;font-weight:600;color:#38B0FF;background:#000">
+      <span id="mixTypeLbl">Mix ▼</span>
+      <svg width="8" height="8" viewBox="0 0 8 8"><path d="M1 2.5 L4 5.5 L7 2.5" fill="none" stroke="#38B0FF" stroke-width="1.2"/></svg>
+    </div>
+    <div id="mixDrop" style="display:none;position:absolute;top:100%;left:0;right:0;z-index:200;background:#1a1a1a;border:.5px solid rgba(255,255,255,.18);border-radius:8px;overflow:hidden;margin-top:2px;min-width:160px">
+      <div class="ddopt on" data-grp="mix" data-v="mix"        onclick="setRandType('mix',this)">Mix ▼</div>
+      <div class="ddopt"    data-grp="mix" data-v="minmaj"     onclick="setRandType('mix',this)">Mix Min/Maj</div>
+      <div class="ddopt"    data-grp="mix" data-v="7mm"        onclick="setRandType('mix',this)">Mix 7 (M+m)</div>
+      <div class="ddopt"    data-grp="mix" data-v="normmm"     onclick="setRandType('mix',this)">Mix norm (M+m)</div>
+      <div class="ddopt"    data-grp="mix" data-v="totale"     onclick="setRandType('mix',this)">Mix Totale</div>
+      <div class="ddopt"    data-grp="mix" data-v="5th"        onclick="setRandType('mix',this)">Mix 5th</div>
+      <div class="ddopt"    data-grp="mix" data-v="7th5th"     onclick="setRandType('mix',this)">Mix 7th &amp; 5th</div>
+      <div class="ddopt"    data-grp="mix" data-v="majfull"    onclick="setRandType('mix',this)">Mix Maj norm+5+7</div>
+      <div class="ddopt"    data-grp="mix" data-v="minfull"    onclick="setRandType('mix',this)">Mix Min norm+5+7</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- POSIZIONE MANICO -->
+
+
+<div style="font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:5px">Sistema Posizioni</div>
+<div style="display:flex;gap:4px;margin-bottom:5px">
+  <div class="fpill on" data-posmode="near" onclick="setPosMode('near',this)">Near</div>
+  <div class="fpill"    data-posmode="wide" onclick="setPosMode('wide',this)">Wide</div>
+</div>
+<div id="nearPosRow" style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px">
+  <div class="fpill on" data-zone="all"  onclick="setPosZone('all',this)">Tutto</div>
+  <div class="fpill"    data-zone="0-3"  onclick="setPosZone('0-3',this)">0–3ᵃ</div>
+  <div class="fpill"    data-zone="4-6"  onclick="setPosZone('4-6',this)">4–6ᵃ</div>
+  <div class="fpill"    data-zone="7-9"  onclick="setPosZone('7-9',this)">7–9ᵃ</div>
+  <div class="fpill"    data-zone="10-12" onclick="setPosZone('10-12',this)">10–12ᵃ</div>
+</div>
+<div id="widePosRow" style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px;display:none">
+  <div class="fpill on" data-zone="all"  onclick="setPosZone('all',this)">Tutto</div>
+  <div class="fpill"    data-zone="1-5"  onclick="setPosZone('1-5',this)">1–5ᵃ</div>
+  <div class="fpill"    data-zone="5-8"  onclick="setPosZone('5-8',this)">5–8ᵃ</div>
+  <div class="fpill"    data-zone="8-12" onclick="setPosZone('8-12',this)">8–12ᵃ</div>
+</div>
+<!-- TEMI -->
+<div style="height:.5px;background:rgba(255,255,255,.08);margin:0 0 10px"></div>
+<div style="font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:6px">Tema</div>
+<div style="display:flex;gap:5px;margin-bottom:8px">
+  <div class="fpill on" data-theme="dark"     onclick="setTheme(this)">Scuro</div>
+  <div class="fpill"    data-theme="light"    onclick="setTheme(this)">Chiaro</div>
+  <div class="fpill"    data-theme="gray"     onclick="setTheme(this)">Grigio</div>
+  <div class="fpill"    data-theme="gradient" onclick="setTheme(this)">Gradient</div>
+</div>
+<div style="font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:5px">Dimensione Testo</div>
+<div style="display:flex;gap:4px">
+  <div class="fpill on" data-fsize="normal" onclick="setFontSize(this)">Normale</div>
+  <div class="fpill"    data-fsize="large"  onclick="setFontSize(this)">Grande</div>
+  <div class="fpill"    data-fsize="xlarge" onclick="setFontSize(this)">Extra</div>
+</div>
+
+  </div>
+
+  <div class="panel-overlay" id="panelOverlay" onclick="closeAllPanels()"></div>
+
+  <!-- SCROLL CENTER -->
+
+  <div class="scroll-center">
+
+<div class="key-row" style="margin-bottom:2px">
+  <div class="modeLbl" id="modeLbl">Semplice</div>
+</div>
+
+<div id="svgWrap" style="width:200px;height:200px">
+  <svg id="mainSvg" viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+
+<circle id="rpl" cx="100" cy="100" r="0" fill="none" stroke="rgba(255,255,255,.15)" stroke-width=".7" opacity="0"/>
+<path d="M84.0,30.8 L79.8,12.3 A90,90 0 0,1 120.2,12.3 L116.0,30.8 A71,71 0 0,0 84.0,30.8" fill="#0A22F0" opacity="0.16" class="r1s" data-idx="0" data-bop="0.16" onclick="setKey(0)" style="cursor:pointer"/><text class="r1l" x="100" y="23" text-anchor="middle" font-size="6" font-weight="300" fill="rgba(255,255,255,.28)" font-family="-apple-system" style="pointer-events:none">Do</text><path d="M88.8,51.3 L84.9,34.7 A67,67 0 0,1 115.1,34.7 L111.2,51.3 A50,50 0 0,0 88.8,51.3" fill="rgba(255,255,255,.03)" opacity="0.07" class="r2s" /><path d="M93.3,70.8 L89.7,55.2 A46,46 0 0,1 110.3,55.2 L106.7,70.8 A30,30 0 0,0 93.3,70.8" fill="rgba(255,255,255,.03)" opacity="0.05" class="r3s" /><path d="M97.5,89.3 L93.9,73.7 A27,27 0 0,1 106.1,73.7 L102.5,89.3 A11,11 0 0,0 97.5,89.3" fill="rgba(255,255,255,.03)" opacity="0.04" class="r4s" /><path d="M120.8,32.1 L126.3,13.9 A90,90 0 0,1 161.4,34.2 L148.4,48.1 A71,71 0 0,0 120.8,32.1" fill="#1430FF" opacity="0.16" class="r1s" data-idx="1" data-bop="0.16" onclick="setKey(1)" style="cursor:pointer"/><text class="r1l" x="140" y="34" text-anchor="middle" font-size="6" font-weight="300" fill="rgba(255,255,255,.28)" font-family="-apple-system" style="pointer-events:none">Sol</text><path d="M114.6,52.2 L119.6,35.9 A67,67 0 0,1 145.7,51.0 L134.1,63.4 A50,50 0 0,0 114.6,52.2" fill="#1430FF" opacity="0.55" class="r2s" /><path d="M108.8,71.3 L113.4,56.0 A46,46 0 0,1 131.4,66.4 L120.5,78.1 A30,30 0 0,0 108.8,71.3" fill="#FF9340" opacity="0.6" class="r3s" /><path d="M103.2,89.5 L107.9,74.2 A27,27 0 0,1 118.4,80.3 L107.5,92.0 A11,11 0 0,0 103.2,89.5" fill="rgba(255,255,255,.03)" opacity="0.04" class="r4s" /><path d="M151.9,51.6 L165.8,38.6 A90,90 0 0,1 186.1,73.7 L167.9,79.2 A71,71 0 0,0 151.9,51.6" fill="#1E6BFF" opacity="0.16" class="r1s" data-idx="2" data-bop="0.16" onclick="setKey(2)" style="cursor:pointer"/><text class="r1l" x="169" y="63" text-anchor="middle" font-size="6" font-weight="300" fill="rgba(255,255,255,.28)" font-family="-apple-system" style="pointer-events:none">Re</text><path d="M136.6,65.9 L149.0,54.3 A67,67 0 0,1 164.1,80.4 L147.8,85.4 A50,50 0 0,0 136.6,65.9" fill="rgba(255,255,255,.03)" opacity="0.07" class="r2s" /><path d="M121.9,79.5 L133.6,68.6 A46,46 0 0,1 144.0,86.6 L128.7,91.2 A30,30 0 0,0 121.9,79.5" fill="rgba(255,255,255,.03)" opacity="0.05" class="r3s" /><path d="M108.0,92.5 L119.7,81.6 A27,27 0 0,1 125.8,92.1 L110.5,96.8 A11,11 0 0,0 108.0,92.5" fill="rgba(255,255,255,.03)" opacity="0.04" class="r4s" /><path d="M169.2,84.0 L187.7,79.8 A90,90 0 0,1 187.7,120.2 L169.2,116.0 A71,71 0 0,0 169.2,84.0" fill="#38B0FF" opacity="0.88" class="r1s" data-idx="3" data-bop="0.88" onclick="setKey(3)" style="cursor:pointer"/><text class="r1l" x="180" y="103" text-anchor="middle" font-size="8" font-weight="700" fill="rgba(255,255,255,.95)" font-family="-apple-system" style="pointer-events:none">La</text><path d="M148.7,88.8 L165.3,84.9 A67,67 0 0,1 165.3,115.1 L148.7,111.2 A50,50 0 0,0 148.7,88.8" fill="#38B0FF" opacity="0.55" class="r2s" /><path d="M129.2,93.3 L144.8,89.7 A46,46 0 0,1 144.8,110.3 L129.2,106.7 A30,30 0 0,0 129.2,93.3" fill="#FF9340" opacity="0.6" class="r3s" /><path d="M110.7,97.5 L126.3,93.9 A27,27 0 0,1 126.3,106.1 L110.7,102.5 A11,11 0 0,0 110.7,97.5" fill="rgba(255,255,255,.03)" opacity="0.04" class="r4s" /><path d="M167.9,120.8 L186.1,126.3 A90,90 0 0,1 165.8,161.4 L151.9,148.4 A71,71 0 0,0 167.9,120.8" fill="#22DDCC" opacity="0.16" class="r1s" data-idx="4" data-bop="0.16" onclick="setKey(4)" style="cursor:pointer"/><text class="r1l" x="169" y="143" text-anchor="middle" font-size="6" font-weight="300" fill="rgba(255,255,255,.28)" font-family="-apple-system" style="pointer-events:none">Mi</text><path d="M147.8,114.6 L164.1,119.6 A67,67 0 0,1 149.0,145.7 L136.6,134.1 A50,50 0 0,0 147.8,114.6" fill="rgba(255,255,255,.03)" opacity="0.07" class="r2s" /><path d="M128.7,108.8 L144.0,113.4 A46,46 0 0,1 133.6,131.4 L121.9,120.5 A30,30 0 0,0 128.7,108.8" fill="#FF9340" opacity="0.6" class="r3s" /><path d="M110.5,103.2 L125.8,107.9 A27,27 0 0,1 119.7,118.4 L108.0,107.5 A11,11 0 0,0 110.5,103.2" fill="rgba(255,255,255,.03)" opacity="0.04" class="r4s" /><path d="M148.4,151.9 L161.4,165.8 A90,90 0 0,1 126.3,186.1 L120.8,167.9 A71,71 0 0,0 148.4,151.9" fill="#18CC66" opacity="0.16" class="r1s" data-idx="5" data-bop="0.16" onclick="setKey(5)" style="cursor:pointer"/><text class="r1l" x="140" y="172" text-anchor="middle" font-size="6" font-weight="300" fill="rgba(255,255,255,.28)" font-family="-apple-system" style="pointer-events:none">Si</text><path d="M134.1,136.6 L145.7,149.0 A67,67 0 0,1 119.6,164.1 L114.6,147.8 A50,50 0 0,0 134.1,136.6" fill="#18CC66" opacity="0.55" class="r2s" /><path d="M120.5,121.9 L131.4,133.6 A46,46 0 0,1 113.4,144.0 L108.8,128.7 A30,30 0 0,0 120.5,121.9" fill="rgba(255,255,255,.03)" opacity="0.05" class="r3s" /><path d="M107.5,108.0 L118.4,119.7 A27,27 0 0,1 107.9,125.8 L103.2,110.5 A11,11 0 0,0 107.5,108.0" fill="rgba(255,255,255,.03)" opacity="0.04" class="r4s" /><path d="M116.0,169.2 L120.2,187.7 A90,90 0 0,1 79.8,187.7 L84.0,169.2 A71,71 0 0,0 116.0,169.2" fill="#CCCC00" opacity="0.16" class="r1s" data-idx="6" data-bop="0.16" onclick="setKey(6)" style="cursor:pointer"/><text class="r1l" x="100" y="183" text-anchor="middle" font-size="6" font-weight="300" fill="rgba(255,255,255,.28)" font-family="-apple-system" style="pointer-events:none">Fa#</text><path d="M111.2,148.7 L115.1,165.3 A67,67 0 0,1 84.9,165.3 L88.8,148.7 A50,50 0 0,0 111.2,148.7" fill="#CCCC00" opacity="0.55" class="r2s" /><path d="M106.7,129.2 L110.3,144.8 A46,46 0 0,1 89.7,144.8 L93.3,129.2 A30,30 0 0,0 106.7,129.2" fill="rgba(255,255,255,.03)" opacity="0.05" class="r3s" /><path d="M102.5,110.7 L106.1,126.3 A27,27 0 0,1 93.9,126.3 L97.5,110.7 A11,11 0 0,0 102.5,110.7" fill="rgba(255,255,255,.03)" opacity="0.04" class="r4s" /><path d="M79.2,167.9 L73.7,186.1 A90,90 0 0,1 38.6,165.8 L51.6,151.9 A71,71 0 0,0 79.2,167.9" fill="#FF9900" opacity="0.16" class="r1s" data-idx="7" data-bop="0.16" onclick="setKey(7)" style="cursor:pointer"/><text class="r1l" x="60" y="172" text-anchor="middle" font-size="6" font-weight="300" fill="rgba(255,255,255,.28)" font-family="-apple-system" style="pointer-events:none">Re♭</text><path d="M85.4,147.8 L80.4,164.1 A67,67 0 0,1 54.3,149.0 L65.9,136.6 A50,50 0 0,0 85.4,147.8" fill="rgba(255,255,255,.03)" opacity="0.07" class="r2s" /><path d="M91.2,128.7 L86.6,144.0 A46,46 0 0,1 68.6,133.6 L79.5,121.9 A30,30 0 0,0 91.2,128.7" fill="rgba(255,255,255,.03)" opacity="0.05" class="r3s" /><path d="M96.8,110.5 L92.1,125.8 A27,27 0 0,1 81.6,119.7 L92.5,108.0 A11,11 0 0,0 96.8,110.5" fill="rgba(255,255,255,.03)" opacity="0.04" class="r4s" /><path d="M48.1,148.4 L34.2,161.4 A90,90 0 0,1 13.9,126.3 L32.1,120.8 A71,71 0 0,0 48.1,148.4" fill="#FF5500" opacity="0.16" class="r1s" data-idx="8" data-bop="0.16" onclick="setKey(8)" style="cursor:pointer"/><text class="r1l" x="31" y="143" text-anchor="middle" font-size="6" font-weight="300" fill="rgba(255,255,255,.28)" font-family="-apple-system" style="pointer-events:none">La♭</text><path d="M63.4,134.1 L51.0,145.7 A67,67 0 0,1 35.9,119.6 L52.2,114.6 A50,50 0 0,0 63.4,134.1" fill="#FF5500" opacity="0.55" class="r2s" /><path d="M78.1,120.5 L66.4,131.4 A46,46 0 0,1 56.0,113.4 L71.3,108.8 A30,30 0 0,0 78.1,120.5" fill="#FF9340" opacity="0.6" class="r3s" /><path d="M92.0,107.5 L80.3,118.4 A27,27 0 0,1 74.2,107.9 L89.5,103.2 A11,11 0 0,0 92.0,107.5" fill="rgba(255,255,255,.03)" opacity="0.04" class="r4s" /><path d="M30.8,116.0 L12.3,120.2 A90,90 0 0,1 12.3,79.8 L30.8,84.0 A71,71 0 0,0 30.8,116.0" fill="#FF2255" opacity="0.16" class="r1s" data-idx="9" data-bop="0.16" onclick="setKey(9)" style="cursor:pointer"/><text class="r1l" x="20" y="103" text-anchor="middle" font-size="6" font-weight="300" fill="rgba(255,255,255,.28)" font-family="-apple-system" style="pointer-events:none">Mi♭</text><path d="M51.3,111.2 L34.7,115.1 A67,67 0 0,1 34.7,84.9 L51.3,88.8 A50,50 0 0,0 51.3,111.2" fill="rgba(255,255,255,.03)" opacity="0.07" class="r2s" /><path d="M70.8,106.7 L55.2,110.3 A46,46 0 0,1 55.2,89.7 L70.8,93.3 A30,30 0 0,0 70.8,106.7" fill="#FF9340" opacity="0.6" class="r3s" /><path d="M89.3,102.5 L73.7,106.1 A27,27 0 0,1 73.7,93.9 L89.3,97.5 A11,11 0 0,0 89.3,102.5" fill="#9B22CC" opacity="0.7" class="r4s" /><path d="M32.1,79.2 L13.9,73.7 A90,90 0 0,1 34.2,38.6 L48.1,51.6 A71,71 0 0,0 32.1,79.2" fill="#CC11AA" opacity="0.16" class="r1s" data-idx="10" data-bop="0.16" onclick="setKey(10)" style="cursor:pointer"/><text class="r1l" x="31" y="63" text-anchor="middle" font-size="6" font-weight="300" fill="rgba(255,255,255,.28)" font-family="-apple-system" style="pointer-events:none">Si♭</text><path d="M52.2,85.4 L35.9,80.4 A67,67 0 0,1 51.0,54.3 L63.4,65.9 A50,50 0 0,0 52.2,85.4" fill="#CC11AA" opacity="0.55" class="r2s" /><path d="M71.3,91.2 L56.0,86.6 A46,46 0 0,1 66.4,68.6 L78.1,79.5 A30,30 0 0,0 71.3,91.2" fill="rgba(255,255,255,.03)" opacity="0.05" class="r3s" /><path d="M89.5,96.8 L74.2,92.1 A27,27 0 0,1 80.3,81.6 L92.0,92.5 A11,11 0 0,0 89.5,96.8" fill="rgba(255,255,255,.03)" opacity="0.04" class="r4s" /><path d="M51.6,48.1 L38.6,34.2 A90,90 0 0,1 73.7,13.9 L79.2,32.1 A71,71 0 0,0 51.6,48.1" fill="#6622FF" opacity="0.16" class="r1s" data-idx="11" data-bop="0.16" onclick="setKey(11)" style="cursor:pointer"/><text class="r1l" x="60" y="34" text-anchor="middle" font-size="6" font-weight="300" fill="rgba(255,255,255,.28)" font-family="-apple-system" style="pointer-events:none">Fa</text><path d="M65.9,63.4 L54.3,51.0 A67,67 0 0,1 80.4,35.9 L85.4,52.2 A50,50 0 0,0 65.9,63.4" fill="#6622FF" opacity="0.55" class="r2s" /><path d="M79.5,78.1 L68.6,66.4 A46,46 0 0,1 86.6,56.0 L91.2,71.3 A30,30 0 0,0 79.5,78.1" fill="#FF9340" opacity="0.6" class="r3s" /><path d="M92.5,92.0 L81.6,80.3 A27,27 0 0,1 92.1,74.2 L96.8,89.5 A11,11 0 0,0 92.5,92.0" fill="rgba(255,255,255,.03)" opacity="0.04" class="r4s" />
+<circle cx="100" cy="100" r="8" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
+<circle id="bpmArc" cx="100" cy="100" r="8" fill="none" stroke="rgba(30,107,255,.45)" stroke-width="1" stroke-dasharray="0 50" stroke-linecap="round" transform="rotate(-90,100,100)"/>
+<circle id="bfl" cx="100" cy="100" r="9" fill="none" stroke="rgba(30,107,255,0)" stroke-width="1.5"/>
+<text id="bpmN" x="100" y="111" text-anchor="middle" font-size="32" font-weight="100" fill="white" font-family="-apple-system" letter-spacing="-3">100</text>
+<text id="tnm" x="100" y="118" text-anchor="middle" font-size="4" fill="rgba(255,255,255,.3)" font-family="-apple-system" letter-spacing="2">BPM</text>
+</svg>
+    </div>
+
+<div id="keyDisp" style="font-size:22px;font-weight:600;letter-spacing:2px;text-transform:uppercase;text-align:center;color:#0A22F0;width:100%;max-width:360px;flex-shrink:0;margin:4px 0 2px">DO MAJ</div>
+
+<div class="ring-legend" id="ringLegend" style="display:none">
+  <div class="rl" id="leg2" onclick="toggleRingLayer('r2s',this,'leg')">
+    <div class="rl-dot" style="background:#22DDCC"></div><div class="rl-txt">Diatonici</div>
+  </div>
+  <div class="rl off" id="leg3" onclick="toggleRingLayer('r3s',this,'leg')">
+    <div class="rl-dot" style="background:#FF9340"></div><div class="rl-txt">Dom.Sec.</div>
+  </div>
+  <div class="rl off" id="leg4" onclick="toggleRingLayer('r4s',this,'leg')">
+    <div class="rl-dot" style="background:#9B22CC"></div><div class="rl-txt">Tritono</div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- HISTORY — always visible, colored by note -->
+<div class="hist-wrap">
+  <div class="hist-head">
+    <div class="hist-lbl">Cronologia Accordi</div>
+    <div class="hist-reset" onclick="clearHist()">↺ Azzera</div>
+  </div>
+  <div class="histScroll" id="histScroll"></div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ACCORDI + PROGRESSIONE (unified) -->
+<div id="unifiedZone" style="width:100%;max-width:360px;flex-shrink:0;display:none">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
+    <div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.28)">
+      Accordi <span id="uZoneKey" style="color:#38B0FF">La</span>
+      <span id="uZoneCnt" style="color:rgba(255,255,255,.22)"> <span id="uZoneN">0</span>/12</span>
+    </div>
+    <div style="display:flex;gap:5px;align-items:center">
+      <div onclick="toggleFretVisibility()"
+        id="occhioBtn" title="Nascondi fretboard"
+        style="cursor:pointer;padding:3px 6px;border-radius:7px;
+        border:.5px solid rgba(255,255,255,.1);color:rgba(255,255,255,.45);
+        display:flex;align-items:center;user-select:none;transition:all .18s"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="display:inline-block;vertical-align:middle"><ellipse cx="7" cy="7" rx="6" ry="3.5" stroke="currentColor" stroke-width="1.1"/><circle cx="7" cy="7" r="1.8" fill="currentColor" opacity=".8"/></svg></div>
+      <div id="noKeyBtn" onclick="toggleNoKeyMode()"
+        style="cursor:pointer;padding:3px 6px;border-radius:7px;
+        border:.5px solid rgba(255,255,255,.12);color:rgba(255,255,255,.4);
+        display:flex;align-items:center;user-select:none;transition:all .2s"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="display:inline-block;vertical-align:middle"><circle cx="5.5" cy="6" r="3" stroke="currentColor" stroke-width="1.1"/><line x1="7.5" y1="7.5" x2="12.5" y2="7.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><line x1="10.5" y1="7.5" x2="10.5" y2="9.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+      <div onclick="acClearQ()"
+        style="font-size:8px;color:rgba(255,255,255,.2);cursor:pointer;
+        border:.5px solid rgba(255,255,255,.08);border-radius:7px;padding:2px 8px">✕</div>
+    </div>
+  </div>
+  <div <div style="width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;">
+    <div id="mainProgSlots" style="display:flex;gap:6px;padding:3px 0 5px;align-items:flex-start;"></div>
+  </div>
+
+</div>
+
+<div class="hr"></div>
+
+<!-- CHORD SECTION — name CENTERED, big fretboard -->
+<div class="chord-section">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;padding:0 4px 4px;width:100%">
+    <div id="fretStartLbl" style="font-size:22px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:-.5px;min-width:32px;line-height:1"></div>
+    <div style="text-align:center;flex:1">
+      <div class="chord-name" id="chordNameDisp">La Min</div>
+      <div class="chord-notes-txt" id="chordNotesDisp">La · Do · Mi</div>
+    </div>
+    <div style="min-width:32px"></div>
+  </div>
+  <div id="fretboardWrap"></div>
+</div>
+
+  </div>
+
+  <!-- BOTTOM PANELS -->
+
+  <div class="panel bot-panel" id="p-accordo" style="overflow:hidden;padding-left:0;padding-right:0;">
+    <div style="padding:0 14px 8px;display:flex;align-items:center;justify-content:space-between">
+      <div class="p-title" style="margin:0">Accordo</div>
+      <div style="font-size:9px;color:rgba(255,255,255,.28)">Tonica: <span id="acTlbl" style="color:#38B0FF">La</span></div>
+    </div>
+
+<!-- NOTE SCROLL: native overflow-x scroll, 3 copies for seamless loop -->
+<!-- TAB ACCORDI / DIATONICI -->
+<div style="display:flex;gap:6px;padding:0 14px;margin-bottom:8px">
+  <div id="acTabAccordi" onclick="acSwitchTab('accordi')" style="flex:1;text-align:center;padding:5px;border-radius:8px;border:.5px solid #1E6BFF;background:rgba(30,107,255,.12);font-size:9px;font-weight:600;color:#38B0FF;cursor:pointer">Accordi</div>
+  <div id="acTabDiatonici" onclick="acSwitchTab('diatonici')" style="flex:1;text-align:center;padding:5px;border-radius:8px;border:.5px solid rgba(255,255,255,.12);background:transparent;font-size:9px;font-weight:500;color:rgba(255,255,255,.35);cursor:pointer">Diatonici</div>
+</div>
+<!-- BODY DIATONICI (hidden by default) -->
+<div id="acDiatBody" style="display:none;padding:0 14px 8px">
+  <div style="font-size:8px;color:rgba(255,255,255,.3);margin-bottom:8px">Accordi diatonici della tonalita corrente</div>
+  <div id="acDiatSlots" style="display:flex;flex-direction:column;gap:5px"></div>
+</div>
+<div id="acAccordiBody">
+<div style="font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);padding:0 14px;margin-bottom:4px">Note</div>
+<div id="acNscroll" style="
+  overflow-x:scroll;overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  display:flex;align-items:center;padding:3px 0 5px;
+  position:relative;
+">
+  <div id="acNtrack" style="display:flex;flex-shrink:0;"></div>
+</div>
+
+<!-- CHORD SCROLL: native overflow-x scroll, 3 copies -->
+<div style="display:flex;align-items:center;padding:0 14px;margin:6px 0 4px;gap:8px">
+  <div style="flex:1;font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25)" id="acClbl">Accordi · La</div>
+  <div style="display:flex;border:.5px solid rgba(255,255,255,.14);border-radius:8px;overflow:hidden">
+    <div id="acTabAll" onclick="acSwitchTab('all')" style="padding:3px 10px;font-size:8px;font-weight:600;letter-spacing:.5px;cursor:pointer;background:rgba(30,107,255,.18);color:#38B0FF">Tutti</div>
+    <div id="acTabDia" onclick="acSwitchTab('diat')" style="padding:3px 10px;font-size:8px;font-weight:600;letter-spacing:.5px;cursor:pointer;background:transparent;color:rgba(255,255,255,.3)">Diatonici</div>
+  </div>
+</div>
+<div id="acCscroll" style="
+  overflow-x:scroll;overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  display:flex;padding:3px 0 6px;
+  position:relative;
+">
+  <div id="acCtrack" style="display:flex;flex-shrink:0;"></div>
+</div>
+<div style="text-align:center;font-size:8px;color:rgba(255,255,255,.18);margin-bottom:8px">
+  ← scorri · tap per aggiungere →
+</div>
+
+<!-- SEPARATOR -->
+<div style="height:.5px;background:rgba(255,255,255,.08);margin:0 0 8px"></div>
+
+<!-- QUEUE -->
+<div style="display:flex;align-items:center;justify-content:space-between;padding:0 14px;margin-bottom:5px">
+  <div style="font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25)">
+    Selezionati <span id="acQcnt" style="color:rgba(255,255,255,.2)">(0)</span>
+  </div>
+  <div style="font-size:8px;color:rgba(255,255,255,.2);cursor:pointer" onclick="acClearQ()">× Svuota</div>
+</div>
+<div id="acQscroll" style="
+  display:flex;gap:8px;overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;padding:4px 14px 8px;min-height:68px;
+  align-items:flex-start;
+">
+  <div id="acQempty" style="font-size:10px;color:rgba(255,255,255,.18)">—</div>
+</div>
+
+  </div>
+
+  <div class="panel bot-panel" id="p-analisi">
+    <div class="p-title">Analisi Armonica</div>
+    <div id="analisiBody" style="display:flex;flex-direction:column;gap:7px"></div>
+  </div>
+
+  <div class="panel bot-panel" id="p-giri">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div class="p-title" style="margin:0">Giri Armonici</div>
+      <div id="giroActiveLbl" style="font-size:9px;color:#38B0FF">—</div>
+    </div>
+
+<!-- TAB SELECTOR -->
+<div style="display:flex;gap:4px;margin-bottom:8px">
+  <div class="fpill on" id="gTab1" onclick="gSwitchTab(1)">Giri Classici</div>
+  <div class="fpill"    id="gTab2" onclick="gSwitchTab(2)">Costruttore</div>
+  <div class="fpill"    id="gTab3" onclick="gSwitchTab(3)">Preset</div>
+</div>
+
+<!-- TAB 1: Giri Classici carousel -->
+<div id="gTabBody1">
+  <div style="overflow-x:scroll;scrollbar-width:none;-webkit-overflow-scrolling:touch;display:flex;gap:6px;padding:2px 0 8px">
+    <div id="giroCarousel" style="display:flex;gap:6px;flex-shrink:0;"></div>
+  </div>
+  <div style="height:.5px;background:rgba(255,255,255,.08);margin:0 0 8px"></div>
+  <div style="font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:5px">Accordi generati <span id="giroGradLbl" style="color:rgba(255,255,255,.4)"></span></div>
+  <div style="display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;padding:2px 0 6px" id="giroSlots">
+    <div style="font-size:10px;color:rgba(255,255,255,.2);padding:8px 0">Seleziona un giro sopra</div>
+  </div>
+  <div style="display:flex;gap:6px;margin-top:8px">
+    <div onclick="giroAddToQueue()" style="flex:1;text-align:center;padding:7px;border:.5px solid var(--b2);border-radius:8px;cursor:pointer;font-size:9px;color:#fff">+ Aggiungi in coda</div>
+    <div onclick="acClearQ()" style="flex:1;text-align:center;padding:7px;border:.5px solid rgba(255,255,255,.12);border-radius:8px;cursor:pointer;font-size:9px;color:rgba(255,255,255,.45)">✕ Pulisci coda</div>
+  </div>
+</div>
+
+<!-- TAB 2: Costruttore gradi -->
+<div id="gTabBody2" style="display:none">
+  <div style="font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:5px">Scegli i gradi della scala</div>
+  <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px" id="degBtns">
+    <div class="deg-btn" data-d="0" onclick="gToggleDeg(0)">i</div>
+    <div class="deg-btn" data-d="1" onclick="gToggleDeg(1)">ii°</div>
+    <div class="deg-btn" data-d="2" onclick="gToggleDeg(2)">III</div>
+    <div class="deg-btn" data-d="3" onclick="gToggleDeg(3)">iv</div>
+    <div class="deg-btn" data-d="4" onclick="gToggleDeg(4)">V</div>
+    <div class="deg-btn" data-d="5" onclick="gToggleDeg(5)">VI</div>
+    <div class="deg-btn" data-d="6" onclick="gToggleDeg(6)">VII</div>
+  </div>
+  <div style="font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:5px">Sequenza selezionata</div>
+  <div style="display:flex;gap:4px;flex-wrap:wrap;min-height:32px;margin-bottom:8px" id="degSeq">
+    <div style="font-size:10px;color:rgba(255,255,255,.2)">Tap sui gradi sopra →</div>
+  </div>
+  <div style="display:flex;gap:5px">
+    <div onclick="gBuildFromDegs()" style="flex:1;text-align:center;padding:7px;border:.5px solid var(--b2);border-radius:8px;cursor:pointer;font-size:9px;color:#fff">▶ Genera</div>
+    <div onclick="gClearDegs()" style="flex:1;text-align:center;padding:7px;border:.5px solid rgba(255,255,255,.12);border-radius:8px;cursor:pointer;font-size:9px;color:rgba(255,255,255,.5)">Azzera</div>
+    <div onclick="toggleMainProgLoop()" id="gLoopBtn2" style="flex:1;text-align:center;padding:7px;border:.5px solid #18CC66;border-radius:8px;cursor:pointer;font-size:9px;color:#fff">◉ Loop</div>
+  </div>
+</div>
+
+<!-- TAB 3: Preset -->
+<div id="gTabBody3" style="display:none">
+  <div style="font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:6px">Preset Rapidi</div>
+  <div id="gPresetList" style="display:flex;flex-direction:column;gap:4px;max-height:220px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.1) transparent"></div>
+</div>
+
+  </div>
+
+  <div class="panel bot-panel" id="p-metro">
+    <div class="p-title">Time · BPM</div>
+    <!-- Big BPM display + controls -->
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+      <span class="mb" onclick="adjBPM(-10)">−10</span>
+      <span class="mb" onclick="adjBPM(-1)">−1</span>
+      <div style="flex:1;text-align:center;font-size:52px;font-weight:100;letter-spacing:-4px;color:#fff;line-height:1" id="bigBpmDisp">100</div>
+      <span class="mb" onclick="adjBPM(1)">+1</span>
+      <span class="mb" onclick="adjBPM(10)">+10</span>
+    </div>
+    <!-- Slider BPM -->
+    <div class="srow"><div class="srow-l">BPM</div><div class="srow-v" id="bpmSlVal">100</div></div>
+    <input type="range" id="bpmSlider" min="20" max="300" value="100" oninput="adjBPM(+this.value-bpm)" style="margin-bottom:8px">
+    <!-- Tap tempo -->
+    <div style="text-align:center;margin-bottom:10px">
+      <div class="tapBtn" style="display:inline-block" onclick="tapTempo()">Tap Tempo</div>
+    </div>
+    <div style="height:.5px;background:rgba(255,255,255,.08);margin:0 0 10px"></div>
+    <!-- Battute -->
+    <div class="srow"><div class="srow-l">Battute</div><div class="srow-v" id="beatsSel">4/4</div></div>
+    <input type="range" min="1" max="4" value="2" oninput="document.getElementById('beatsSel').textContent=['2/4','3/4','4/4','6/8'][this.value-1]" style="margin-bottom:10px">
+    <!-- Beat per accordo -->
+    <div style="font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:5px">Beat per Accordo</div>
+    <div style="display:flex;gap:4px;margin-bottom:10px">
+      <div class="pp" data-bpa="1" onclick="setBPA(this)">1</div>
+      <div class="pp sel" data-bpa="4" onclick="setBPA(this)">4 <span style="font-size:7px;opacity:.5">4/4</span></div>
+      <div class="pp" data-bpa="8" onclick="setBPA(this)">8 <span style="font-size:7px;opacity:.5">4/8</span></div>
+      <div class="pp" data-bpa="16" onclick="setBPA(this)">16 <span style="font-size:7px;opacity:.5">8/8</span></div>
+    </div>
+    <div style="height:.5px;background:rgba(255,255,255,.08);margin:0 0 10px"></div>
+    <!-- Progressione BPM -->
+    <div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:7px">Progressione BPM automatica</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <div class="pp sel" onclick="selPP(this)">Off</div>
+      <div class="pp" onclick="selPP(this)">+1/4</div>
+      <div class="pp" onclick="selPP(this)">+1/8</div>
+      <div class="pp" onclick="selPP(this)">+2/4</div>
+      <div class="pp" onclick="selPP(this)">+2/8</div>
+      <div class="pp" onclick="selPP(this)">+4/8</div>
+    </div>
+  </div>
+
+  </div></div></div>
+  <!-- BOTTOM BAR -->
+
+  <div class="botbar" id="botBar">
+    <div class="bar-item" onclick="togglePanel('p-accordo','bot',this)">
+      <div class="bi-icon">♩</div><div class="bi-label">Accordo</div>
+    </div>
+    <div class="bar-item" onclick="togglePanel('p-analisi','bot',this)">
+      <div class="bi-icon">◈</div><div class="bi-label">Analisi</div>
+    </div>
+    <div class="play-slot">
+      <div class="pBtn" id="pBtn" onclick="onPlayBtn()">▶</div>
+    </div>
+    <div class="bar-item" onclick="togglePanel('p-giri','bot',this)">
+      <div class="bi-icon">⟳</div><div class="bi-label">Giri</div>
+    </div>
+    <div class="bar-item" onclick="togglePanel('p-metro','bot',this)">
+      <div class="bi-icon"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" style="display:inline-block;vertical-align:middle"><circle cx="8.5" cy="8.5" r="6.8" stroke="currentColor" stroke-width="1.2"/><line x1="8.5" y1="3.2" x2="8.5" y2="8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="8.5" y1="8.5" x2="12" y2="10.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="bi-label">Time</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- JS_PLACEHOLDER -->
+</body>
+</html>

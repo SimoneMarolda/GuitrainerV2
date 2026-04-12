@@ -1,0 +1,491 @@
+═══════════════════════════════════════════════════════════════════════════
+  GUITRAINER — GUIDA CODICI UNIVOCI
+  File: GUIDE.txt
+  Versione: 1.0
+═══════════════════════════════════════════════════════════════════════════
+
+  Come usare questa guida
+  ─────────────────────────────────────────────────────────────────────────
+  Ogni elemento dell'app ha un codice univoco nel formato:
+
+    GT - [AREA] - [SEZIONE] - [SOTTO] - [NUM]
+
+  Cerca il codice nel file corrispondente per trovare esattamente
+  la riga o il blocco da modificare. Tutti i codici sono nei commenti JS/CSS.
+
+  Esempio:
+    Vuoi modificare l'angolo del gradient background?
+    → Cerca GT-TOP-OPZ-DSP-BKG-004 in src/top/opzioni/display.js
+
+
+═══════════════════════════════════════════════════════════════════════════
+  AREA: GLB — Globale
+═══════════════════════════════════════════════════════════════════════════
+
+  ── GT-GLB-STY — Stylesheet globale (src/style.css) ────────────────────
+  GT-GLB-STY-VAR-001    Variabili CSS (:root) — colori, spaziature, radius
+  GT-GLB-STY-BKG-001    Sistema background (solid / gradient)
+  GT-GLB-STY-BKG-002    Pannello picker background (#gtBgPanel)
+  GT-GLB-STY-ANI-001    Animazioni globali (bgl, fadeIn, barFlash, panelDown, panelUp, borderGlow)
+  GT-GLB-STY-RST-001    Reset base (box-sizing, margin, overflow)
+  GT-GLB-STY-LAY-001    Layout principale (screen, scroll-center)
+  GT-GLB-STY-TOP-001    Top Bar (.topbar)
+  GT-GLB-STY-BOT-001    Bottom Bar (.botbar)
+  GT-GLB-STY-BAR-001    Bar items — container, icona, label, stato attivo, play btn
+    GT-GLB-STY-BAR-001a   Item container (.bar-item)
+    GT-GLB-STY-BAR-001b   Icona (.bi-icon)
+    GT-GLB-STY-BAR-001c   Label (.bi-label)
+    GT-GLB-STY-BAR-001d   Stato attivo (.bar-item.sel)
+    GT-GLB-STY-BAR-001e   Play button (.pBtn)
+  GT-GLB-STY-PNL-001    Pannelli — base, top, bottom, animazioni, overlay, titolo, sgi, pill, separator
+    GT-GLB-STY-PNL-001a   Base pannello (.panel)
+    GT-GLB-STY-PNL-001b   Top panel
+    GT-GLB-STY-PNL-001c   Bottom panel
+    GT-GLB-STY-PNL-001d   Animazioni apertura
+    GT-GLB-STY-PNL-001e   Overlay chiusura (.panel-overlay)
+    GT-GLB-STY-PNL-001f   Titolo pannello (.p-title)
+    GT-GLB-STY-PNL-001g   Segmento gruppo (.sgi)
+    GT-GLB-STY-PNL-001h   Pill generico (.fpill)
+    GT-GLB-STY-PNL-001i   Separatore (.hr)
+  GT-GLB-STY-CIR-001    Cerchio delle Quinte — SVG wrap, label, mode label, ring legend
+    GT-GLB-STY-CIR-001a   Wrapper SVG (#svgWrap)
+    GT-GLB-STY-CIR-001b   Label tonalità (#keyDisp)
+    GT-GLB-STY-CIR-001c   Label modo (.modeLbl)
+    GT-GLB-STY-CIR-001d   Ring legend (.ring-legend, .rl)
+  GT-GLB-STY-FRB-001    Fretboard — sezione, nome accordo, note, SVG wrap, label tasto
+    GT-GLB-STY-FRB-001a   Sezione (.chord-section)
+    GT-GLB-STY-FRB-001b   Nome accordo (.chord-name)
+    GT-GLB-STY-FRB-001c   Note accordo (.chord-notes-txt)
+    GT-GLB-STY-FRB-001d   Wrap SVG (#fretboardWrap)
+    GT-GLB-STY-FRB-001e   Label tasto iniziale (#fretStartLbl)
+  GT-GLB-STY-HIS-001    Cronologia Accordi — wrapper, intestazione, bottone azzera, scroll chip
+    GT-GLB-STY-HIS-001a   Wrapper (.hist-wrap)
+    GT-GLB-STY-HIS-001b   Intestazione (.hist-head, .hist-lbl)
+    GT-GLB-STY-HIS-001c   Bottone azzera (.hist-reset)
+    GT-GLB-STY-HIS-001d   Scroll chip (.histScroll)
+  GT-GLB-STY-SEQ-001    Unified Zone / Sequenza — wrapper, slot, stati drag
+    GT-GLB-STY-SEQ-001a   Wrapper (#unifiedZone)
+    GT-GLB-STY-SEQ-001b   Slot (.prog-slot, .active-beat, .drag-over-slot)
+  GT-GLB-STY-ACC-001    Pannello Accordo — pill nota, chord card, queue chip
+    GT-GLB-STY-ACC-001a   Note pill (.acnpill)
+    GT-GLB-STY-ACC-001b   Chord card (.accard, .fc, .pc, .onq)
+    GT-GLB-STY-ACC-001c   Queue chip (.acqchip)
+  GT-GLB-STY-GIR-001    Pannello Giri — giro-card, deg-btn, preset-row
+    GT-GLB-STY-GIR-001a   Giro card (.giro-card)
+    GT-GLB-STY-GIR-001b   Degree button (.deg-btn)
+    GT-GLB-STY-GIR-001c   Preset row (.preset-row-item)
+  GT-GLB-STY-MET-001    Pannello Metronomo — BPM display, bottoni, tap, pill, slider, srow
+    GT-GLB-STY-MET-001a   Display BPM grande (#bigBpmDisp)
+    GT-GLB-STY-MET-001b   Bottoni ±BPM (.mb)
+    GT-GLB-STY-MET-001c   Tap tempo (.tapBtn)
+    GT-GLB-STY-MET-001d   Pill beat/progressione (.pp)
+    GT-GLB-STY-MET-001e   Slider globale (input[type=range])
+    GT-GLB-STY-MET-001f   Row label/valore (.srow)
+  GT-GLB-STY-OPZ-001    Pannello Opzioni — toggle switch, dropdown
+    GT-GLB-STY-OPZ-001a   Toggle switch (.gt-toggle, .gt-thumb)
+    GT-GLB-STY-OPZ-001b   Dropdown (.ddopt)
+  GT-GLB-STY-THM-001    Temi — light, gray, continuità visiva topbar/botbar
+    GT-GLB-STY-THM-001a   Tema chiaro (.theme-light)
+    GT-GLB-STY-THM-001b   Tema grigio (.theme-gray)
+    GT-GLB-STY-THM-001c   Nota continuità topbar ↔ botbar
+  GT-GLB-STY-TYP-001    Tipografia responsiva (font-size, classi gt-font-*)
+
+  ── GT-GLB-COR — Core (src/core.js) ────────────────────────────────────
+  GT-GLB-COR-STA-001    Stato globale (bpm, playing, activeIdx, activeKey…)
+  GT-GLB-COR-STA-002    Stato training (randMode, noKeyMode, beatsPerAccord…)
+  GT-GLB-COR-STA-003    Stato progressione (mainProg, selGiroId, degSequence…)
+  GT-GLB-COR-STA-004    Stato generazione automatica (gnNumChords, gnFlags…)
+  GT-GLB-COR-STA-005    Stato display (curTheme, curBgType, curBgColor…)
+  GT-GLB-COR-PNL-001    togglePanel() — apri/chiudi pannello
+  GT-GLB-COR-PNL-002    closeAllPanels()
+  GT-GLB-COR-OVR-001    Overlay intercetta tap fuori pannello
+  GT-GLB-COR-UTL-001    Utility — selPP(), ripple(), gtn()
+    GT-GLB-COR-UTL-001a   selPP() — selezione pill
+    GT-GLB-COR-UTL-001b   ripple() — effetto onda cerchio SVG
+    GT-GLB-COR-UTL-001c   gtn() — nome tempo musicale (ANDANTE, ALLEGRO…)
+  GT-GLB-COR-INI-001    coreInit() — bootstrap
+
+  ── GT-GLB-DAT — Dati Accordi (src/data/chords.js) ─────────────────────
+  GT-GLB-DAT-NOT-001    NOTES — 12 note nel cerchio delle quinte
+  GT-GLB-DAT-COL-001    COLORS — colore HEX per ogni nota
+  GT-GLB-DAT-SCL-001    SCALES — note di ogni scala minore naturale
+  GT-GLB-DAT-CHD-001    CHORDS — 418 diteggiature accordi
+  GT-GLB-DAT-MAP-001    KEY_CHORD_MAP — tonica → lista chiavi accordi
+  GT-GLB-DAT-CHR-001    CHROM_TO_NQ — cromatico → indice NOTES
+  GT-GLB-DAT-OPN-001    OPEN_CHROM — pitch cromatico delle 6 corde aperte
+  GT-GLB-DAT-ANC-001    AC_NC — nome nota → valore cromatico
+  GT-GLB-DAT-AMN-001    AC_MINOR — intervalli scala minore naturale [0,2,3,5,7,8,10]
+  GT-GLB-DAT-ADQ-001    AC_DEG_QUAL — qualità attesa per ogni grado scala
+
+  ── GT-GLB-INI — Init (src/init.js) ────────────────────────────────────
+  GT-GLB-INI-COR-001    coreInit()
+  GT-GLB-INI-DSP-001    displayInit()
+  GT-GLB-INI-AUD-001    adjBPM(0) — display BPM iniziale
+  GT-GLB-INI-TON-001    setTonMode('maj')
+  GT-GLB-INI-KEY-001    setKey(0) — tonalità iniziale
+  GT-GLB-INI-FRB-001    updateFretboard() — fretboard iniziale
+  GT-GLB-INI-RND-001    randMode = true — random attivo all'avvio
+  GT-GLB-INI-HIS-001    histWrap display iniziale
+  GT-GLB-INI-GIR-001    renderGiroCarousel() + renderPresetList()
+  GT-GLB-INI-HKS-001    Hook togglePanel per ogni pannello
+
+
+═══════════════════════════════════════════════════════════════════════════
+  AREA: CTR — Centro Scrollabile
+═══════════════════════════════════════════════════════════════════════════
+
+  ── GT-CTR-CIR — Cerchio delle Quinte (src/center/circle.js) ───────────
+  GT-CTR-CIR-KEY-001    setKey() — imposta tonalità attiva
+  GT-CTR-CIR-RNG-001    Anello R1 (quinte) — 12 settori esterni
+  GT-CTR-CIR-RNG-002    Anello R2 (diatonici) — verde #22DDCC
+  GT-CTR-CIR-RNG-003    Anello R3 (dom.sec.) — arancio #FF9340
+  GT-CTR-CIR-RNG-004    Anello R4 (tritono) — viola #9B22CC
+  GT-CTR-CIR-TGL-001    toggleRingLayer() — mostra/nascondi anello
+  GT-CTR-CIR-MOD-001    setMode() — semplice/normale/difficile/libero
+  GT-CTR-CIR-LBL-001    Label #keyDisp e .modeLbl
+  GT-CTR-CIR-ARC-001    BPM arc SVG interno
+  GT-CTR-CIR-TON-001    setTonMode() — MIN / MAJ
+
+  ── GT-CTR-FRB — Fretboard (src/center/fretboard.js) ───────────────────
+  GT-CTR-FRB-COL-001    noteColorForStringFret() — colore nota per corda/tasto
+  GT-CTR-FRB-SVG-001    buildFretSvg() — fretboard grande
+    GT-CTR-FRB-SVG-001a   Dimensioni W/H — moltiplicatore 0.44
+    GT-CTR-FRB-SVG-001b   Capotasto (nut)
+    GT-CTR-FRB-SVG-001c   Tasti verticali
+    GT-CTR-FRB-SVG-001d   Corde (spessore variabile e→E)
+    GT-CTR-FRB-SVG-001e   Barrè
+    GT-CTR-FRB-SVG-001f   Dots note (cerchio / quadrato root)
+    GT-CTR-FRB-SVG-001g   Numeri dita
+  GT-CTR-FRB-CRD-001    buildFretCard() — mini fretboard card
+    GT-CTR-FRB-CRD-001a   fRatio=1.6, celle rettangolari
+    GT-CTR-FRB-CRD-001b   Numero tasto sopra nut
+    GT-CTR-FRB-CRD-001c   Logica dot/root identica a SVG-001f
+  GT-CTR-FRB-UPD-001    updateFretboard() — aggiorna vista accordo
+  GT-CTR-FRB-LBL-001    #fretStartLbl — numero tasto iniziale
+  GT-CTR-FRB-VIS-001    toggleFretVisibility() — nascondi/mostra
+
+  ── GT-CTR-HIS — Cronologia (src/center/history.js) ────────────────────
+  GT-CTR-HIS-ADD-001    addHist() — aggiunge voce
+  GT-CTR-HIS-REN-001    renderHist() — disegna chip
+    GT-CTR-HIS-REN-001a   Chip: barra colorata + nome + qualità
+    GT-CTR-HIS-REN-001b   Chip attivo: animazione barFlash
+    GT-CTR-HIS-REN-001c   Bottone × rimozione singola
+  GT-CTR-HIS-CLR-001    clearHist()
+  GT-CTR-HIS-NAV-001    Click su chip → ritorna a tonalità
+  GT-CTR-HIS-SCR-001    Auto-scroll all'ultimo chip
+  GT-CTR-HIS-COL-001    Collassa altezza quando sequenza attiva
+
+  ── GT-CTR-SEQ — Sequenza (src/center/sequence.js) ─────────────────────
+  GT-CTR-SEQ-REN-001    renderUnified() — disegna slot
+    GT-CTR-SEQ-REN-001a   Slot: barra colorata + nome + qualità
+    GT-CTR-SEQ-REN-001b   Slot attivo: highlight beat corrente
+    GT-CTR-SEQ-REN-001c   Bottone × top-right
+  GT-CTR-SEQ-DEL-001    acDelFromQ() — rimuove accordo
+  GT-CTR-SEQ-ADD-001    Bottone "+" — apre pannello Accordo
+  GT-CTR-SEQ-DRG-001    Drag desktop
+  GT-CTR-SEQ-DRG-002    Drag iOS touch
+  GT-CTR-SEQ-CNT-001    updateUZoneCnt() — contatore N/12
+  GT-CTR-SEQ-VIS-001    Visibilità zona (mostra se acQueue > 0)
+
+
+═══════════════════════════════════════════════════════════════════════════
+  AREA: TOP — Top Bar
+═══════════════════════════════════════════════════════════════════════════
+
+  ── GT-TOP-TON — Tonalità (src/top/tonalita.js) ────────────────────────
+  GT-TOP-TON-KEY-001    setKey() — imposta tonalità
+  GT-TOP-TON-MOD-001    setTonMode() — toggle MIN / MAJ
+    GT-TOP-TON-MOD-001a   Stile bottoni MIN/MAJ
+    GT-TOP-TON-MOD-001b   Aggiorna R2 per tonalità maggiore
+  GT-TOP-TON-BTN-001    12 bottoni nota
+    GT-TOP-TON-BTN-001a   Colori bordo/background per nota
+    GT-TOP-TON-BTN-001b   onclick → setKey(index)
+
+  ── GT-TOP-MOD — Modalità (src/top/modalita.js) ────────────────────────
+  GT-TOP-MOD-STU-001    setStudioMode()
+    GT-TOP-MOD-STU-001a   Accordi
+    GT-TOP-MOD-STU-001b   Armonia
+    GT-TOP-MOD-STU-001c   Scale
+    GT-TOP-MOD-STU-001d   Acc. + Scale
+    GT-TOP-MOD-STU-001e   Arm. + Scale
+  GT-TOP-MOD-CER-001    setMode()
+    GT-TOP-MOD-CER-001a   Semplice
+    GT-TOP-MOD-CER-001b   Normale
+    GT-TOP-MOD-CER-001c   Difficile
+    GT-TOP-MOD-CER-001d   Libero
+
+  ── GT-TOP-GEN — Genera (src/top/genera.js) ────────────────────────────
+  GT-TOP-GEN-SLI-001    Slider n° accordi (2-12)
+  GT-TOP-GEN-SLI-002    Slider n° battute (1-8)
+  GT-TOP-GEN-BSE-001    Base armonica
+    GT-TOP-GEN-BSE-001a   Pill Diatonico
+    GT-TOP-GEN-BSE-001b   Pill + Random Tonale
+  GT-TOP-GEN-REG-001    Regole armoniche
+    GT-TOP-GEN-REG-001a   Dominanti Secondarie
+    GT-TOP-GEN-REG-001b   Sostituzione Tritono
+    GT-TOP-GEN-REG-001c   Intercambio Modale
+    GT-TOP-GEN-REG-001d   Accordo Napoletano
+  GT-TOP-GEN-BTN-001    Bottone Genera
+  GT-TOP-GEN-BTN-002    Bottone Loop
+  GT-TOP-GEN-BLD-001    buildGenera() — logica generazione
+  GT-TOP-GEN-TGL-001    gnToggle() — toggle flag regole
+  GT-TOP-GEN-LOP-001    toggleGenLoop()
+
+  ── GT-TOP-CER — Cerchio Toggle (src/top/cerchio.js) ───────────────────
+  GT-TOP-CER-R2-001     Toggle Anello Diatonici (verde)
+  GT-TOP-CER-R3-001     Toggle Dominanti Secondarie (arancio)
+  GT-TOP-CER-R4-001     Toggle Sostituzione Tritono (viola)
+  GT-TOP-CER-TXT-001    Testi ON/OFF (#rl2txt #rl3txt #rl4txt)
+  GT-TOP-CER-LGD-001    Sincronizza ring legend centro
+
+  ── GT-TOP-OPZ-ALN — Opzioni › Allenamento (src/top/opzioni/training.js)
+  GT-TOP-OPZ-ALN-TGL-001   Toggle Libero — Senza Tonalità
+    GT-TOP-OPZ-ALN-TGL-001a  toggleFree()
+    GT-TOP-OPZ-ALN-TGL-001b  noKeyMode state
+  GT-TOP-OPZ-ALN-TGL-002   Toggle Random Accordi
+    GT-TOP-OPZ-ALN-TGL-002a  toggleRandMode()
+    GT-TOP-OPZ-ALN-TGL-002b  syncRandToggle()
+    GT-TOP-OPZ-ALN-TGL-002c  Gestione #keyDisp
+
+  ── GT-TOP-OPZ-TYP — Opzioni › Tipo Accordi (src/top/opzioni/types.js) ─
+  GT-TOP-OPZ-TYP-MAJ-001   Dropdown MAJ (Magg. / Magg7 / Dom7 / Power5)
+    GT-TOP-OPZ-TYP-MAJ-001a  Magg.
+    GT-TOP-OPZ-TYP-MAJ-001b  Magg 7
+    GT-TOP-OPZ-TYP-MAJ-001c  Dom 7
+    GT-TOP-OPZ-TYP-MAJ-001d  Power 5ª
+  GT-TOP-OPZ-TYP-MIN-001   Dropdown MIN (Min. / Min7 / Power5)
+    GT-TOP-OPZ-TYP-MIN-001a  Min.
+    GT-TOP-OPZ-TYP-MIN-001b  Min 7
+    GT-TOP-OPZ-TYP-MIN-001c  Power 5ª
+  GT-TOP-OPZ-TYP-MIX-001   Dropdown MIX (9 opzioni)
+    GT-TOP-OPZ-TYP-MIX-001a  Mix ▼
+    GT-TOP-OPZ-TYP-MIX-001b  Mix Min/Maj
+    GT-TOP-OPZ-TYP-MIX-001c  Mix 7 (M+m)
+    GT-TOP-OPZ-TYP-MIX-001d  Mix norm (M+m)
+    GT-TOP-OPZ-TYP-MIX-001e  Mix Totale
+    GT-TOP-OPZ-TYP-MIX-001f  Mix 5th
+    GT-TOP-OPZ-TYP-MIX-001g  Mix 7th & 5th
+    GT-TOP-OPZ-TYP-MIX-001h  Mix Maj norm+5+7
+    GT-TOP-OPZ-TYP-MIX-001i  Mix Min norm+5+7
+  GT-TOP-OPZ-TYP-FN-001    toggleDropdown()
+  GT-TOP-OPZ-TYP-FN-002    setRandType()
+  GT-TOP-OPZ-TYP-MAP-001   QUAL_MAP
+
+  ── GT-TOP-OPZ-POS — Opzioni › Posizioni (src/top/opzioni/positions.js) ─
+  GT-TOP-OPZ-POS-MOD-001   setPosMode() — Near / Wide
+    GT-TOP-OPZ-POS-MOD-001a  Near
+    GT-TOP-OPZ-POS-MOD-001b  Wide
+  GT-TOP-OPZ-POS-ZON-001   setPosZone()
+  GT-TOP-OPZ-POS-ZON-002   Zone Near
+    GT-TOP-OPZ-POS-ZON-002a  Tutto
+    GT-TOP-OPZ-POS-ZON-002b  0–3ª
+    GT-TOP-OPZ-POS-ZON-002c  4–6ª
+    GT-TOP-OPZ-POS-ZON-002d  7–9ª
+    GT-TOP-OPZ-POS-ZON-002e  10–12ª
+  GT-TOP-OPZ-POS-ZON-003   Zone Wide
+    GT-TOP-OPZ-POS-ZON-003a  Tutto
+    GT-TOP-OPZ-POS-ZON-003b  1–5ª
+    GT-TOP-OPZ-POS-ZON-003c  5–8ª
+    GT-TOP-OPZ-POS-ZON-003d  8–12ª
+  GT-TOP-OPZ-POS-FLT-001   matchZone()
+  GT-TOP-OPZ-POS-FLT-002   matchFretPos()
+
+  ── GT-TOP-OPZ-DSP — Opzioni › Display (src/top/opzioni/display.js) ────
+  GT-TOP-OPZ-DSP-THM-001   Oggetto THEMES (dark / light / gray)
+  GT-TOP-OPZ-DSP-THM-002   setTheme() — applica tema
+  GT-TOP-OPZ-DSP-BKG-001   Sistema background personalizzabile
+  GT-TOP-OPZ-DSP-BKG-002   BG_SOLID_PRESETS — 8 colori solidi predefiniti
+  GT-TOP-OPZ-DSP-BKG-003   BG_GRADIENT_PRESETS — 6 gradient predefiniti
+  GT-TOP-OPZ-DSP-BKG-004   Slider angolo gradient (0-360°)
+  GT-TOP-OPZ-DSP-BKG-005   Color picker custom (input color start/end)
+  GT-TOP-OPZ-DSP-FNT-001   setFontSize() — normale / grande / extra
+  GT-TOP-OPZ-DSP-INI-001   displayInit()
+
+
+═══════════════════════════════════════════════════════════════════════════
+  AREA: BOT — Bottom Bar
+═══════════════════════════════════════════════════════════════════════════
+
+  ── GT-BOT-ACC-NWH — Accordo › Note Wheel (src/bottom/accordo/notes.js) ─
+  GT-BOT-ACC-NWH-BLD-001   acBuildNotes() — costruisce il wheel
+    GT-BOT-ACC-NWH-BLD-001a  3 copie per scroll infinito
+    GT-BOT-ACC-NWH-BLD-001b  CELL = clientWidth / 4
+    GT-BOT-ACC-NWH-BLD-001c  Colore pill = COLORS[i]
+  GT-BOT-ACC-NWH-SCR-001   acLoopScroll() — gestione loop
+    GT-BOT-ACC-NWH-SCR-001a  Salto in avanti se < 30%
+    GT-BOT-ACC-NWH-SCR-001b  Salto indietro se > 170%
+  GT-BOT-ACC-NWH-TAP-001   Click nota → aggiorna acTonic
+  GT-BOT-ACC-NWH-LBL-001   Label #acTlbl
+
+  ── GT-BOT-ACC-CWH — Accordo › Chord Wheel (src/bottom/accordo/chords.js)
+  GT-BOT-ACC-CWH-BLD-001   acBuildChords() — costruisce il wheel
+    GT-BOT-ACC-CWH-BLD-001a  3 copie per scroll infinito
+    GT-BOT-ACC-CWH-BLD-001b  CELL = (clientWidth-12) / 3
+    GT-BOT-ACC-CWH-BLD-001c  Card: mini fretboard + nome + qualità
+  GT-BOT-ACC-CWH-CMP-001   acCmp() — compatibilità scala
+    GT-BOT-ACC-CWH-CMP-001a  2 = diatonico (.fc verde)
+    GT-BOT-ACC-CWH-CMP-001b  1 = root in scala (.pc arancio)
+    GT-BOT-ACC-CWH-CMP-001c  0 = fuori scala
+  GT-BOT-ACC-CWH-TAP-001   Click card → aggiunge/rimuove queue
+  GT-BOT-ACC-CWH-FLT-001   acForTonic() — filtra per tonica
+  GT-BOT-ACC-CWH-LBL-001   Label #acClbl
+
+  ── GT-BOT-ACC-QUE — Accordo › Queue (src/bottom/accordo/queue.js) ─────
+  GT-BOT-ACC-QUE-REN-001   acRenderQ() — disegna chip
+    GT-BOT-ACC-QUE-REN-001a  Chip: indice + nome + qualità + ×
+    GT-BOT-ACC-QUE-REN-001b  Bordatura .fc / .pc
+  GT-BOT-ACC-QUE-ADD-001   acAddQ()
+  GT-BOT-ACC-QUE-CLR-001   acClearQ()
+  GT-BOT-ACC-QUE-INQ-001   acInQ()
+  GT-BOT-ACC-QUE-DRG-001   Drag desktop
+  GT-BOT-ACC-QUE-DRG-002   Drag iOS touch
+  GT-BOT-ACC-QUE-CNT-001   #acQcnt contatore
+  GT-BOT-ACC-QUE-EMP-001   #acQempty placeholder
+
+  ── GT-BOT-ANA — Analisi (src/bottom/analisi.js) ───────────────────────
+  GT-BOT-ANA-UPD-001    updateAnalisi()
+  GT-BOT-ANA-SCL-001    Modalità Scala (queue vuota)
+    GT-BOT-ANA-SCL-001a   Header scala
+    GT-BOT-ANA-SCL-001b   Riga grado: Romano + nota + qualità + funzione
+  GT-BOT-ANA-QUE-001    Modalità Queue (con accordi)
+    GT-BOT-ANA-QUE-001a   Riga accordo: nome + grado + funzione + freccia
+    GT-BOT-ANA-QUE-001b   Colori verde/arancio
+  GT-BOT-ANA-FTR-001    Footer fisso
+    GT-BOT-ANA-FTR-001a   Dominante Secondaria
+    GT-BOT-ANA-FTR-001b   Sostituzione Tritono
+    GT-BOT-ANA-FTR-001c   Relativa Maggiore
+  GT-BOT-ANA-STR-001    Stringhe funzione armonica (7 gradi)
+
+  ── GT-BOT-GIR-CLS — Giri › Classici (src/bottom/giri/classici.js) ─────
+  GT-BOT-GIR-CLS-DAT-001   Array GIRI (12 giri)
+    GT-BOT-GIR-CLS-DAT-001a  I–IV–V
+    GT-BOT-GIR-CLS-DAT-001b  I–V–vi–IV
+    GT-BOT-GIR-CLS-DAT-001c  II–V–I
+    GT-BOT-GIR-CLS-DAT-001d  I–6–2–5
+    GT-BOT-GIR-CLS-DAT-001e  6–4–1–5
+    GT-BOT-GIR-CLS-DAT-001f  Blues
+    GT-BOT-GIR-CLS-DAT-001g  Andalusa
+    GT-BOT-GIR-CLS-DAT-001h  Canon
+    GT-BOT-GIR-CLS-DAT-001i  Dark
+    GT-BOT-GIR-CLS-DAT-001j  Epica
+    GT-BOT-GIR-CLS-DAT-001k  Ballad
+    GT-BOT-GIR-CLS-DAT-001l  Modale
+  GT-BOT-GIR-CLS-CAR-001   renderGiroCarousel()
+  GT-BOT-GIR-CLS-SLT-001   renderGiroSlots()
+  GT-BOT-GIR-CLS-ADD-001   giroAddToQueue()
+  GT-BOT-GIR-CLS-SVG-001   GIRI_SVG (icone inline)
+
+  ── GT-BOT-GIR-BLD — Giri › Costruttore (src/bottom/giri/builder.js) ───
+  GT-BOT-GIR-BLD-BTN-001   7 pulsanti gradi (i ii° III iv V VI VII)
+  GT-BOT-GIR-BLD-TGL-001   gToggleDeg()
+  GT-BOT-GIR-BLD-REN-001   renderDegSeq()
+    GT-BOT-GIR-BLD-REN-001a  Pill grado cliccabile per rimuovere
+  GT-BOT-GIR-BLD-CLR-001   gClearDegs()
+  GT-BOT-GIR-BLD-GEN-001   gBuildFromDegs()
+  GT-BOT-GIR-BLD-LOP-001   toggleMainProgLoop()
+  GT-BOT-GIR-BLD-HLP-001   bestChordForDeg()
+
+  ── GT-BOT-GIR-PRE — Giri › Preset (src/bottom/giri/presets.js) ────────
+  GT-BOT-GIR-PRE-DAT-001   Array PRESETS (12 progressioni)
+    GT-BOT-GIR-PRE-DAT-001a  II–V–I
+    GT-BOT-GIR-PRE-DAT-001b  I–V–vi–IV
+    GT-BOT-GIR-PRE-DAT-001c  i–VI–III–VII
+    GT-BOT-GIR-PRE-DAT-001d  I–6–2–5
+    GT-BOT-GIR-PRE-DAT-001e  i–VII–VI–VII
+    GT-BOT-GIR-PRE-DAT-001f  I–IV–V
+    GT-BOT-GIR-PRE-DAT-001g  6–4–1–5
+    GT-BOT-GIR-PRE-DAT-001h  Canon
+    GT-BOT-GIR-PRE-DAT-001i  Ballad 1–3–6–4
+    GT-BOT-GIR-PRE-DAT-001j  Circle 5ª
+    GT-BOT-GIR-PRE-DAT-001k  Andalusa
+    GT-BOT-GIR-PRE-DAT-001l  Modal Drone
+  GT-BOT-GIR-PRE-REN-001   renderPresetList()
+  GT-BOT-GIR-PRE-TAP-001   Click preset → buildProgFromDegs()
+
+  ── GT-BOT-MET — Metronomo (src/bottom/metro.js) ───────────────────────
+  GT-BOT-MET-CTX-001    getACtx() — AudioContext iOS safe
+  GT-BOT-MET-CLK-001    playClick() — audio click
+    GT-BOT-MET-CLK-001a   Battito forte: 1200 Hz
+    GT-BOT-MET-CLK-001b   Battito debole: 800 Hz
+    GT-BOT-MET-CLK-001c   Envelope: 8ms ramp + 80ms decay
+  GT-BOT-MET-SRT-001    startM()
+  GT-BOT-MET-STP-001    stopM()
+  GT-BOT-MET-PLY-001    togglePlay()
+  GT-BOT-MET-BPM-001    adjBPM()
+    GT-BOT-MET-BPM-001a   Aggiorna #bpmN #tnm arc
+    GT-BOT-MET-BPM-001b   Aggiorna slider e #bigBpmDisp
+  GT-BOT-MET-TAP-001    tapTempo()
+  GT-BOT-MET-BET-001    onBeat()
+    GT-BOT-MET-BET-001a   Flash cerchio e #bfl
+    GT-BOT-MET-BET-001b   Avanza progressione
+    GT-BOT-MET-BET-001c   Avanza random
+  GT-BOT-MET-BPA-001    setBPA() — beat per accordo
+  GT-BOT-MET-SLI-001    Slider BPM (20-300)
+  GT-BOT-MET-SLI-002    Slider battute
+  GT-BOT-MET-SLI-003    Pills progressione BPM automatica
+  GT-BOT-MET-PLY-002    onPlayBtn()
+
+
+═══════════════════════════════════════════════════════════════════════════
+  TABELLA RAPIDA — Modifica → File → Codice
+═══════════════════════════════════════════════════════════════════════════
+
+  COSA MODIFICARE                     FILE                             CODICE
+  ─────────────────────────────────────────────────────────────────────────────
+  Diteggiatura accordo                src/data/chords.js               GT-GLB-DAT-CHD-001
+  Aggiungere Power 5ª                 src/data/chords.js               GT-GLB-DAT-CHD-001
+  Colori note                         src/data/chords.js               GT-GLB-DAT-COL-001
+  Fretboard grande (dimensioni)       src/center/fretboard.js          GT-CTR-FRB-SVG-001a
+  Fretboard grande (dot/root)         src/center/fretboard.js          GT-CTR-FRB-SVG-001f
+  Mini fretboard card                 src/center/fretboard.js          GT-CTR-FRB-CRD-001
+  Numero tasto iniziale               src/center/fretboard.js          GT-CTR-FRB-LBL-001
+  Cerchio SVG (anelli)                src/center/circle.js             GT-CTR-CIR-RNG-001..004
+  Cerchio (toggle anelli)             src/top/cerchio.js               GT-TOP-CER-R2..R4-001
+  Cronologia chip design              src/center/history.js            GT-CTR-HIS-REN-001
+  Sequenza slot design                src/center/sequence.js           GT-CTR-SEQ-REN-001
+  Note wheel scroll                   src/bottom/accordo/notes.js      GT-BOT-ACC-NWH-SCR-001
+  Chord wheel card                    src/bottom/accordo/chords.js     GT-BOT-ACC-CWH-BLD-001
+  Queue chip                          src/bottom/accordo/queue.js      GT-BOT-ACC-QUE-REN-001
+  Analisi armonica                    src/bottom/analisi.js            GT-BOT-ANA-UPD-001
+  Giri classici (aggiungere giro)     src/bottom/giri/classici.js      GT-BOT-GIR-CLS-DAT-001
+  Preset progressioni                 src/bottom/giri/presets.js       GT-BOT-GIR-PRE-DAT-001
+  Costruttore gradi                   src/bottom/giri/builder.js       GT-BOT-GIR-BLD-001..007
+  BPM / click audio                   src/bottom/metro.js              GT-BOT-MET-CLK-001
+  Beat per accordo                    src/bottom/metro.js              GT-BOT-MET-BPA-001
+  Dropdown tipo accordi               src/top/opzioni/types.js         GT-TOP-OPZ-TYP-MIX-001
+  Zone posizione tasto                src/top/opzioni/positions.js     GT-TOP-OPZ-POS-ZON-002
+  Tema colori                         src/top/opzioni/display.js       GT-TOP-OPZ-DSP-THM-001
+  Background solid/gradient           src/top/opzioni/display.js       GT-TOP-OPZ-DSP-BKG-001
+  Palette background predefiniti      src/top/opzioni/display.js       GT-TOP-OPZ-DSP-BKG-002
+  Gradient presets                    src/top/opzioni/display.js       GT-TOP-OPZ-DSP-BKG-003
+  Angolo gradient                     src/top/opzioni/display.js       GT-TOP-OPZ-DSP-BKG-004
+  Color picker custom                 src/top/opzioni/display.js       GT-TOP-OPZ-DSP-BKG-005
+  Dimensione testo                    src/top/opzioni/display.js       GT-TOP-OPZ-DSP-FNT-001
+  Toggle Random / Libero              src/top/opzioni/training.js      GT-TOP-OPZ-ALN-TGL-001..002
+  Altezza Top Bar                     src/style.css                    GT-GLB-STY-VAR-001 (--topbar-h)
+  Altezza Bottom Bar                  src/style.css                    GT-GLB-STY-VAR-001 (--botbar-h)
+  Icone bar items                     template.html + style.css        GT-GLB-STY-BAR-001b
+  Bordi / hairline                    src/style.css                    GT-GLB-STY-VAR-001 (--hairline)
+  Animazioni globali                  src/style.css                    GT-GLB-STY-ANI-001
+  Stato globale variabili             src/core.js                      GT-GLB-COR-STA-001..005
+  Logica apertura pannelli            src/core.js                      GT-GLB-COR-PNL-001
+  Bootstrap / ordine inizializzaz.    src/init.js                      GT-GLB-INI-*
+
+
+═══════════════════════════════════════════════════════════════════════════
+  NOTE
+═══════════════════════════════════════════════════════════════════════════
+
+  • I file src/data/chords.js, src/center/*, src/top/*, src/bottom/* e
+    src/init.js vengono popolati eseguendo:
+      node migrate.js Guitrainer_Backup_Ultimate_V2.html
+
+  • src/core.js e src/top/opzioni/display.js sono già completi e
+    NON vengono sovrascritti da migrate.js.
+
+  • src/style.css è già completo e NON viene sovrascritto da migrate.js.
+
+  • Per ogni build iOS esegui:
+      node build.js Guitrainer_V[N]_[descrizione].html
+
+═══════════════════════════════════════════════════════════════════════════
